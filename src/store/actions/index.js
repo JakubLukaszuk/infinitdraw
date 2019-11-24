@@ -1,0 +1,1 @@
+export {setAmoutOfRolls} from './game';
