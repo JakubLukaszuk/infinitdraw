@@ -3,7 +3,8 @@ import ReactDom from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-
+import Firebase from './components/Firebase/firebase';
+import {FirebaseContext} from './components/Firebase/context';
 import thunk from 'redux-thunk';
 
 import gameReducer from './store/reducers/game';
@@ -20,7 +21,9 @@ const store = createStore(rootReducer);
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <FirebaseContext.Provider value={new Firebase()}>
+        <App/>
+      </FirebaseContext.Provider>
     </BrowserRouter>
   </Provider>
 
