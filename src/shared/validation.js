@@ -4,7 +4,9 @@ export const checkValidity = (value, rules) => {
   if (!rules) {
     return true;
   }
-
+  if(rules.notEpmty){
+    validity = validity.trim() !== '';
+  }
   if (rules.required) {
     validity = value.trim() !== '' && validity;
   }

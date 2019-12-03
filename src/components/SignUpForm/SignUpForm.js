@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
-
+import {Link, withRouter} from 'react-router-dom';
+import {compose} from 'recompose';
 
 import * as ROUTES from '../../constants/constants';
 
 import Input from '../UI/Input/Input';
-import { withFirebase } from '../Firebase';
+import {withFirebase} from '../Firebase';
 import {checkValidity, checkStringEquality} from '../../shared/validation';
 
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
-    <SignUpForm />
+    <SignUpForm/>
   </div>
 );
 
@@ -74,35 +73,36 @@ const INITAL_CHECK_PASSWORD_STATE = {
   toutched: false
 }
 
-const SignUpFormBase  = props => {
+const SignUpFormBase = props => {
 
-const [registrationData,
-  setRegistrationData] = useState(INITIAL_REGISTATION_DATA_STATE)
+  const [registrationData,
+    setRegistrationData] = useState(INITIAL_REGISTATION_DATA_STATE)
 
-const [passwordCheck,
-  setPasswordCheck] = useState(INITAL_CHECK_PASSWORD_STATE)
+  const [passwordCheck,
+    setPasswordCheck] = useState(INITAL_CHECK_PASSWORD_STATE)
 
-const [error,
-  setError] = useState({error: null})
+  const [error,
+    setError] = useState({error: null})
 
   const isFormValid = () => {
     if (!passwordCheck.valid)
       return false;
-for (let key in registrationData) {
-    if (!registrationData[key].valid)
-      return false;
-    }
-  return true;
-}
+    for (let key in registrationData) {
+      if (!registrationData[key].valid)
+        return false;
+      }
+    return true;
+  }
 
- const onSubmit = (event) => {
+  const onSubmit = (event) => {
     if (isFormValid()) {
-        props
+      props
         .firebase
         .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
         .then(authUser => {
           setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
           setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
+          error({error: null})
           //this.props.history.push(ROUTES.HOME);
         })
         .catch(error => {
@@ -174,10 +174,7 @@ const SignUpLink = () => (
   </p>
 );
 
-const SignUpForm = compose(
-  withRouter,
-  withFirebase,
-)(SignUpFormBase);
+const SignUpForm = compose(withRouter, withFirebase,)(SignUpFormBase);
 
 export default SignUpPage;
 
