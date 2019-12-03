@@ -1,19 +1,18 @@
 import React from 'react';
-import classes from './Input.css';
 
 const input = (props) => {
     let inputElement = null;
-    const inputElementClasses = [classes.inputElement];
+    // const inputElementClasses = [classes.inputElement];
+//                    className = {inputElementClasses.join(' ')}
 
     if(props.invalid && props.toutched){
-        inputElementClasses.push(classes.Invalid);
+        // inputElementClasses.push(classes.Invalid);
     }
 
     switch(props.elementType){
         case('input'):
             inputElement =(
                 <input
-                    className = {inputElementClasses.join(' ')}
                     {...props.elementConfig}
                     value={props.value}
                     onChange={props.changed}
@@ -22,7 +21,6 @@ const input = (props) => {
         case('textarea'):
             inputElement = (
                 <textarea
-                    className = {inputElementClasses.join(' ')}
                     {...props.elementConfig}
                     value={props.value}
                     onChange={props.changed}
@@ -30,15 +28,14 @@ const input = (props) => {
               break;
         default:
             inputElement = <input
-                className = {inputElementClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed}
               />;
     }
     return(
-        <div className = {classes.Input}>
-            <label className = {classes.Label}>
+        <div >
+            <label >
             {props.label}</label>
             {inputElement}
         </div>);

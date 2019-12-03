@@ -4,12 +4,13 @@ import {BrowserRouter} from 'react-router-dom';
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import Firebase from './components/Firebase/firebase';
-import {FirebaseContext} from './components/Firebase/context';
+import {FirebaseContext} from './components/Firebase';
 import thunk from 'redux-thunk';
 
 import gameReducer from './store/reducers/game';
 import './global.sass';
 import App from './App';
+
 
 const rootReducer = combineReducers({
   gameReducer: gameReducer,
