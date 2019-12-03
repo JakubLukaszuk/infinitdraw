@@ -11,7 +11,6 @@ const Layout = props => {
 
     return (
       <Aux>
-        <Navigation/>
         <RollFrames />
         <SignUpPage/>
         <SignInPage/>

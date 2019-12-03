@@ -1,12 +1,14 @@
-import React from 'react';
+import React,{ Component } from 'react';
 import Layout from '../src/containers/Layout/Layout';
-const App = props => {
+import {Router, Route} from 'react-router-dom';
+import Navigation from '../src/components/Navigation/Navigation';
+import { withAuthentication } from './components/Session';
 
-        return(
-            <div>
-                <Layout/>
-            </div>
-        )
-}
 
-export default App;
+const App = () => (
+      <div>
+        <Navigation />
+        <Layout/>
+      </div>
+  );
+  export default withAuthentication(App);
