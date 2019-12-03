@@ -5,7 +5,7 @@ import {compose} from 'recompose';
 import Input from '../UI/Input/Input';
 import {withFirebase} from '../Firebase';
 import {checkValidity} from '../../shared/validation';
-import * as ROUTES from '../../constants/constants';
+import * as ROUTES from '../../constants/routes';
 
 
 const SignInPage = () => (

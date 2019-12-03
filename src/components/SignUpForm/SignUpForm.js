@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
-import * as ROUTES from '../../constants/constants';
+import * as ROUTES from '../../constants/routes';
 
 import Input from '../UI/Input/Input';
 import {withFirebase} from '../Firebase';
