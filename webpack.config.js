@@ -1,6 +1,7 @@
 const path = require('path');
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
@@ -73,6 +74,10 @@ module.exports = {
         loader: 'url-loader?name=images/[name].[ext]'
       }
     ]
+  },
+  mode: 'production',
+  optimization: {
+    minimizer: [new TerserPlugin({ /* additional options here */ })],
   },
   resolve: {
     extensions: ['.js', '.jsx', '.sass']

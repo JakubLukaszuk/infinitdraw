@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
 
@@ -174,7 +174,7 @@ const SignUpLink = () => (
   </p>
 );
 
-const SignUpForm = compose(withRouter, withFirebase,)(SignUpFormBase);
+const SignUpForm = compose(withRouter, withFirebase)(SignUpFormBase);
 
 export default SignUpPage;
 
