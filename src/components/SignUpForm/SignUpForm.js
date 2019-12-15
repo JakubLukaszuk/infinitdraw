@@ -19,7 +19,7 @@ const INITIAL_REGISTATION_DATA_STATE = {
   nickname: {
     elementType: 'input',
     elemetConfig: {
-      type: 'emial',
+      type: 'text',
       placeholder: 'nickname'
     },
     value: '',
@@ -85,10 +85,10 @@ const SignUpFormBase = props => {
     setError] = useState({error: null})
 
   const isFormValid = () => {
-    if (!passwordCheck.valid)
+    if (!passwordCheck.valid) 
       return false;
     for (let key in registrationData) {
-      if (!registrationData[key].valid)
+      if (!registrationData[key].valid) 
         return false;
       }
     return true;
@@ -99,6 +99,15 @@ const SignUpFormBase = props => {
       props
         .firebase
         .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
+        .then(authUser => {
+          const email = registrationData.emial.value;
+          const nickname = registrationData.nickname.value;
+          return this
+            .props
+            .firebase
+            .user(authUser.user.uid)
+            .set({nickname, email});
+        })
         .then(authUser => {
           setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
           setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
