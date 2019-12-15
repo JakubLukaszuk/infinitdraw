@@ -7,8 +7,7 @@ import SignInPage from "../../components/SignInForm/SignInForm";
 import Aux from '../../hoc/Auxlary/Axulary';
 import PasswordForget from '../../components/PasswordForget'
 import Navigation from '../../components/Navigation/Navigation';
-import ChangePassword from '../../components/ChangePassword/index';
-import AccouontPage from '../../components/AccountPage/AccountPage';
+import AccouontPage from '../../components/Account/AccountPage';
 
 const Layout = props => {
 
@@ -18,6 +17,7 @@ const Layout = props => {
         <SignUpPage/>
         <SignInPage/>
         <AccouontPage/>
+        <PasswordForget/>
       </Aux>
     );
 
