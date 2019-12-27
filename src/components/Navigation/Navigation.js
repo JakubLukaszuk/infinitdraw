@@ -1,47 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import SignOutButton from '../SignOutButton/SignOutButton';
-import * as ROUTES from '../../constants/routes';
+import DrawerToggler from './SideDrawer/DrawerToggle/DrawerToggler';
+import NavigationItems from './NavigationItems/NavigationItems';
+import style from './Navigation.module.sass';
 
 import { AuthUserContext } from '../Session';
 
-const Navigation = () => (
-  <div>
-    <AuthUserContext.Consumer>
-      {authUser => authUser
-        ? <NavigationAuth/>
-        : <NavigationNonAuth/>
-}
-    </AuthUserContext.Consumer>
-  </div>
-);
-const NavigationAuth = () => (
-  <ul>
-    <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <SignOutButton/>
-    </li>
-  </ul>
-);
-const NavigationNonAuth = () => (
-  <ul>
-    <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
-    <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </li>
-  </ul>
+const Navigation = (props) => (
+  <header className={style.navigation}>
+  <DrawerToggler click = {props.openSideDrawer}/>
+  <nav className = {style.desktopOnly}>
+    <NavigationItems/>
+  </nav>
+</header>
 );
 export default Navigation;
