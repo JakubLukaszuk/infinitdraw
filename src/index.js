@@ -5,6 +5,7 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import Firebase from './components/Firebase/firebase';
 import {FirebaseContext} from './components/Firebase';
+import * as serviceWorker from './serviceWorker';
 import thunk from 'redux-thunk';
 
 import gameReducer from './store/reducers/game';
@@ -31,3 +32,5 @@ const app = (
 );
 
 ReactDom.render(app, document.getElementById('root'));
+
+serviceWorker.unregister();

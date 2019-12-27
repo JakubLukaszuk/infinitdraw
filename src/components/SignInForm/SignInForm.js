@@ -18,7 +18,7 @@ const INITAL_PASSWORD = {
   elementType: 'input',
   elemetConfig: {
     type: 'password',
-    placeholder: 'confirm password'
+    placeholder: 'password'
   },
   validation: {
     required: true,

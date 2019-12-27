@@ -15,6 +15,11 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: ''
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+ },
   devtool: 'cheap-module-eval-source-map',
   module: {
     rules: [

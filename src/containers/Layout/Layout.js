@@ -6,18 +6,18 @@ import SignUpPage from '../../components/SignUpForm/SignUpForm';
 import SignInPage from "../../components/SignInForm/SignInForm";
 import Aux from '../../hoc/Auxlary/Axulary';
 import PasswordForget from '../../components/PasswordForget'
-import Navigation from '../../components/Navigation/Navigation';
 import AccouontPage from '../../components/Account/AccountPage';
+import HomePage from '../../components/HomePage/HomePage';
+import Navigation from '../../components/Navigation/Navigation';
+
 
 const Layout = props => {
 
     return (
       <Aux>
-        <RollFrames />
-        <SignUpPage/>
-        <SignInPage/>
-        <AccouontPage/>
-        <PasswordForget/>
+        <Navigation/>
+        {props.children}
+
       </Aux>
     );
 

@@ -96,34 +96,48 @@ const SignUpFormBase = props => {
 
   const onSubmit = (event) => {
     if (isFormValid()) {
-      const roles = [];
+      let money = 0, rolls =0;
       props
-        .firebase
-        .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
-        .then(authUser => {
-          const email = registrationData.emial.value;
-          const username = registrationData.nickname.value;
-          console.log(props.firebase.user);
+      .firebase
+      .gameBaseValues()
+      .on('value', snapshot => {
+        const gameData = snapshot.val();
+        if (gameData) {
+          money = gameData.startMoney;
+          rolls = gameData.startRollsAmout
+        }
+      });
+      if(money && rolls){
+        const roles = [];
+        props
+          .firebase
+          .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
+          .then(authUser => {
+            const email = registrationData.emial.value;
+            const username = registrationData.nickname.value;
+            // Create a user in your Firebase realtime database
+            return props.firebase.user(authUser.user.uid).set({
+              username,
+              email,
+              roles,
+              rolls,
+              money
+            });
+          })
+          // .then(() => {
+          //   props.firebase.doSendEmailVerification();
+          // })
+          .then(authUser => {
+            setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
+            setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
+            error({error: null})
+            //this.props.history.push(ROUTES.HOME);
+          })
+          .catch(error => {
+            setError({error});
+          });
+      }
 
-          // Create a user in your Firebase realtime database
-          return props.firebase.user(authUser.user.uid).set({
-            username,
-            email,
-            roles,
-          });          
-        })
-        .then(() => {
-          props.firebase.doSendEmailVerification();
-        })
-        .then(authUser => {
-          setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
-          setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
-          error({error: null})
-          //this.props.history.push(ROUTES.HOME);
-        })
-        .catch(error => {
-          setError({error});
-        });
     }
     event.preventDefault();
   }
