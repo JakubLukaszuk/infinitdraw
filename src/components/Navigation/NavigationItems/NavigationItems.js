@@ -19,8 +19,8 @@ const navigationItems = () => (
 );
 const NavigationAuth = () => (
   <ul className = {style.navigationItems}>
-  <NavItem link = {ROUTES.HOME}><b>Home</b></NavItem>
-  <NavItem link = {ROUTES.ACCOUNT}><b>Account</b></NavItem>
+  <NavItem link = {ROUTES.HOME}>Home</NavItem>
+  <NavItem link = {ROUTES.ACCOUNT}>Account</NavItem>
     <li>
       <SignOutButton/>
     </li>
@@ -28,9 +28,9 @@ const NavigationAuth = () => (
 );
 const NavigationNonAuth = () => (
   <ul className = {style.navigationItems}>
-  <NavItem link = {ROUTES.LANDING}><b>Landing</b></NavItem>
-  <NavItem link = {ROUTES.SIGN_IN}><b>Sign in</b></NavItem>
-  <NavItem link = {ROUTES.SIGN_UP}><b>Sign Up</b></NavItem>
+  <NavItem link = {ROUTES.LANDING}>Landing</NavItem>
+  <NavItem link = {ROUTES.SIGN_IN}>Sign in</NavItem>
+  <NavItem link = {ROUTES.SIGN_UP}>Sign Up</NavItem>
   </ul>
 );
 export default navigationItems;

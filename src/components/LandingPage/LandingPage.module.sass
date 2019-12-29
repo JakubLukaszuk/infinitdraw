@@ -1,0 +1,29 @@
+@import ../../style/_mixins
+@import ../../style/_colors
+
+
+
++neonAnimation($neonLightRed, $neonDarkRed, $neonLightYellow, $neonDarkYellow, $neonDarkerYellow, neon)
+
+
+.wrapper
+    display: flex
+    height: 150vh
+    width: 100vw
+    background: $bgc
+    .head
+        margin-top: 52px
+        height: 30vh
+        text-align: center
+        width: 100%
+        position: relative
+        .neon
+            font-family: 'neon'
+            color: $neonRedFont
+            font-size: 9vw
+            line-height: 9vw
+            text-shadow: 0 0 3vw $neonRedTextShadow
+            animation: neon 1s ease infinite
+            position: absolute
+            top: 50%
+            transform: translate(50%, -50%)

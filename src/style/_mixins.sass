@@ -1,0 +1,20 @@
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=neonAnimation($lighterFirstColour, $darkerFirstColour, $lighterSecondColour, $darkerSecondColour, $darkestSecondColour, $name)
+     @keyframes #{$name}
+        0%,
+        100%
+            text-shadow: 0 0 1vw #{$lighterFirstColour}, 0 0 3vw #{$lighterFirstColour}, 0 0 10vw #{$lighterFirstColour}, 0 0 10vw #{$lighterFirstColour}, 0 0 .4vw #{$lighterSecondColour}, .5vw .5vw .1vw #{$darkerSecondColour}
+            color: #{$lighterSecondColour}
+
+        50%
+            text-shadow: 0 0 .5vw #{$darkerFirstColour}, 0 0 1.5vw #{$darkerFirstColour}, 0 0 5vw #{$darkerFirstColour}, 0 0 5vw #{$darkerFirstColour}, 0 0 .2vw #{$darkerFirstColour}, .5vw .5vw .1vw #{$darkestSecondColour}
+            color: #{$darkerSecondColour}

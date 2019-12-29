@@ -1,3 +1,5 @@
+@import ../../../style/_colors
+
 $bgDefault      : #9b59b6
 $bgHighlight    : #8e44ad
 $colDefault     : #ecf0f1
@@ -6,15 +8,13 @@ $borderColor    : black
 
 .NavigationItem
     background-color: $bgDefault
-    display: block
     text-align: center
-    border: 1px solid $borderColor
-    &:hover
-        background-color: $bgHighlight
     a
         text-decoration: none
-        padding: 16px 10px
-        margin-top: 5px
+        padding: 14px 10px
+        display: block
+        &:hover
+            background-color: $bgHighlight
 
 
 

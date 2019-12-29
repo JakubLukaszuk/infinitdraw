@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Backdrop from '../../UI/BackDrop/BackDrop';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import classes from './SideDrawer.module.sass';
 import Aux from '../../../hoc/Auxlary/Axulary';
@@ -11,9 +12,10 @@ const sideDrawer = (props) => {
   }
   return (
     <Aux>
+    <Backdrop show = {props.open} clicked = {props.closed}/>
       <div className={attachedClasses.join(' ')} onClick={props.closed}>
         <nav>
-          <NavigationItems isAuthenticated = {props.isAuthenticated}/>
+          <NavigationItems/>
         </nav>
       </div>
     </Aux>
