@@ -28,7 +28,7 @@ const NavigationAuth = () => (
 );
 const NavigationNonAuth = () => (
   <ul className = {style.navigationItems}>
-  <NavItem link = {ROUTES.LANDING}>Landing</NavItem>
+  <NavItem link = {ROUTES.LANDING} exact>Home</NavItem>
   <NavItem link = {ROUTES.SIGN_IN}>Sign in</NavItem>
   <NavItem link = {ROUTES.SIGN_UP}>Sign Up</NavItem>
   </ul>

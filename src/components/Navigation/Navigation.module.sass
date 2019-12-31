@@ -1,11 +1,16 @@
+@import ../../style/_colors
+@import ../../style/_mixins
+
+
 .navigation
     width: 100%
     position: fixed
     top: 0
     left: 0
-    background-color: #f5a55a
-    border-bottom: 1px solid black
-    box-shadow: 1px 1px 1px #272623
+    background-color: $navBg
+    +simpleNeonBorder($neonBorder, $neonBorderShadow)
+    border: none
+    border-bottom: 1px solid $neonBorder
     display: flex
     justify-content: space-between
     align-items: center

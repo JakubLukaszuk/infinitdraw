@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import sytyle from './NavigationItem.module.sass';
 
 const navigationItem = (props) => (
-    <li className = {sytyle.NavigationItem}>
+    <li className = {sytyle.navigationItem}>
         <NavLink
         to={props.link}
         exact = {props.exact}

@@ -1,12 +1,3 @@
-=keyframes($name)
-  @-webkit-keyframes #{$name}
-    @content
-  @-moz-keyframes #{$name}
-    @content
-  @-ms-keyframes #{$name}
-    @content
-  @keyframes #{$name}
-    @content
 
 =neonAnimation($lighterFirstColour, $darkerFirstColour, $lighterSecondColour, $darkerSecondColour, $darkestSecondColour, $name)
      @keyframes #{$name}
@@ -18,3 +9,9 @@
         50%
             text-shadow: 0 0 .5vw #{$darkerFirstColour}, 0 0 1.5vw #{$darkerFirstColour}, 0 0 5vw #{$darkerFirstColour}, 0 0 5vw #{$darkerFirstColour}, 0 0 .2vw #{$darkerFirstColour}, .5vw .5vw .1vw #{$darkestSecondColour}
             color: #{$darkerSecondColour}
+
+=simpleNeonBorder($neonColor, $lightColor)
+    box-shadow: 0 0 1px #{$lightColor}, 0 0 2px #{$lightColor}, 0 0 6px #{$lightColor}, 0 0 12px #{$lightColor}, inset 0 0 1px #{$lightColor}, inset 0 0 2px #{$lightColor}, inset 0 0 6px #{$lightColor}, inset 0 0 12px #{$lightColor}
+    border: 3px solid #{$neonColor}
+
+
