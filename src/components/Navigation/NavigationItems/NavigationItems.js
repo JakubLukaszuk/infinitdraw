@@ -21,6 +21,7 @@ const NavigationAuth = () => (
   <ul className = {style.navigationItems}>
   <NavItem link = {ROUTES.HOME}>Home</NavItem>
   <NavItem link = {ROUTES.ACCOUNT}>Account</NavItem>
+  <NavItem link = {ROUTES.GAME}>Game</NavItem>
     <li>
       <SignOutButton/>
     </li>

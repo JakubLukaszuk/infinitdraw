@@ -59,8 +59,6 @@ class MessagesBase extends Component {
               ...messageObject[key],
               uid: key
             }));
-            console.log(messageObject);
-            console.log(messageList);
           this.setState({messages: messageList, loading: false});
         } else {
           this.setState({messages: null, loading: false});
@@ -74,7 +72,6 @@ class MessagesBase extends Component {
       .on('value', snapshot => {
         const messageObject = snapshot.val();
         if (messageObject) {
-          console.log(messageObject.startMoney);
         }
       });
   }
@@ -171,4 +168,5 @@ class MessageItem extends Component {
 const Messages = withFirebase(MessagesBase);
 
 const condition = authUser => !!authUser;
+
 export default compose(withAuthorization(condition),)(HomePage);

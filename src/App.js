@@ -10,6 +10,7 @@ import SignInPage from './components/SignInForm/SignInForm';
 import PasswordForgetPage from './components/PasswordForget';
 import HomePage from './components/HomePage/HomePage';
 import AccountPage from './components/Account/AccountPage';
+import Game from './containers/Game/Game';
 
 const App = () => (
   <div>
@@ -19,6 +20,7 @@ const App = () => (
           ? <Switch>
               <Route path={ROUTES.HOME} component={HomePage}/>
               <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
+              <Route path={ROUTES.GAME} component={Game}/>
             </Switch>
           : <Switch>
             <Route exact path={ROUTES.LANDING} component={LandingPage}/>

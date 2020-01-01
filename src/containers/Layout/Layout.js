@@ -27,7 +27,9 @@ const Layout = props => {
     <Aux>
       <Navigation openSideDrawer={sideDrawerOpenHander}/>
       <SideDrawer open={isSideDrawerVisible} closed={sideDrawerClosedHandler}/>
-       {props.children}
+      <div>
+        {props.children}
+      </div>
     </Aux>
   );
 

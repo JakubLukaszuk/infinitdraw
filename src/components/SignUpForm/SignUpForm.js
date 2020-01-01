@@ -96,6 +96,7 @@ const SignUpFormBase = props => {
 
   const onSubmit = (event) => {
     if (isFormValid()) {
+      console.log("valid");
       let money = 0, rolls =0;
       props
       .firebase
@@ -104,9 +105,10 @@ const SignUpFormBase = props => {
         const gameData = snapshot.val();
         if (gameData) {
           money = gameData.startMoney;
-          rolls = gameData.startRollsAmout
+          rolls = gameData.startRollsAmout;
         }
       });
+      console.log(money);
       if(money && rolls){
         const roles = [];
         props
@@ -131,7 +133,7 @@ const SignUpFormBase = props => {
             setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
             setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
             error({error: null})
-            //this.props.history.push(ROUTES.HOME);
+            props.history.push(ROUTES.GAME);
           })
           .catch(error => {
             setError({error});
@@ -139,6 +141,9 @@ const SignUpFormBase = props => {
       }
 
     }
+    else
+      console.log("notValid");
+      
     event.preventDefault();
   }
 

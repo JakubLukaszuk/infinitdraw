@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 const rollFrames = props => {
 
   const createRolls = () => {
-    console.log(props.rollsAmout);
     let rolls = []
     // Outer loop to create parent
     for (let i = 0; i < props.rollsAmout; i++) {
@@ -17,7 +16,7 @@ const rollFrames = props => {
   }
 
   return (
-    <div>
+    <div className = {style.rolls}>
       {createRolls()}
     </div>
   );

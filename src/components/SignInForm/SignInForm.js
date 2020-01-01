@@ -66,7 +66,7 @@ const SignInFormBase = props => {
         setPassword(INITAL_PASSWORD);
         setEmail(INITAL_EMAIL);
         error({error: null});
-        // props   .history   .push(ROUTES.HOME);
+        props.history.push(ROUTES.HOME);
       }).catch(error => {
         setError({error})
         console.log(error);

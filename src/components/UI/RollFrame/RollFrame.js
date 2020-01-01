@@ -3,7 +3,8 @@ import style from './RollFrame.module.sass';
 
 const rollFrame = props =>{
     return(
-        <div className = {[style.standardBG, style.roll].join(' ')}>
+        <div className = {style.frame}>
+            <div className = {[style.standardBG, style.roll].join(' ')}/>
         </div>
     );
 }
