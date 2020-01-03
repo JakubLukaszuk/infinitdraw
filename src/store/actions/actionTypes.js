@@ -6,4 +6,7 @@ export const DECREASE_AMOUT_OF_MONEY = 'DECREASE_AMOUT_OF_MONEY';
 
 export const SET_BID = 'SET_BID';
 
+export const START_ROLL = 'START_ROLL';
+export const STOP_ROLL = 'STOP_ROLL';
+
 

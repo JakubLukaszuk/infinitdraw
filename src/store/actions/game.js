@@ -16,6 +16,15 @@ export const setBid = (bid) => {
     return {type: actionTypes.SET_BID, bid: bid}
 }
 
+export const startRoll = () => {
+    return {type: actionTypes.START_ROLL}
+}
+
+export const stopRoll = () => {
+    return {type: actionTypes.STOP_ROLL}
+}
+
+
 
 
 

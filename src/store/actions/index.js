@@ -2,6 +2,8 @@ export {
   setMoney,
   decraseMoney,
   increaseMoney,
-  setBid
+  setBid,
+  startRoll,
+  stopRoll
 }
 from './game';

@@ -5,7 +5,7 @@ const initialState = {
   money: 0,
   bid: 0,
   aveilableBids: [],
-  switchTab: []
+  rollMove: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         rollsAmout: 3,
         money: action.money,
-        aveilableBids: [10, 20, 50],
+        aveilableBids: [10, 20, 50]
       }
 
     case actionTypes.INCREASE_AMOUT_OF_MONEY:
@@ -88,10 +88,19 @@ const reducer = (state = initialState, action) => {
       }
       //bids
     case actionTypes.SET_BID:
-      console.log(state.bid);
       return {
         ...state,
         bid: action.bid
+      }
+    case actionTypes.START_ROLL:
+      return {
+        ...state,
+        rollMove: true
+      }
+    case actionTypes.STOP_ROLL:
+      return {
+        ...state,
+        rollMove: false
       }
 
     default:

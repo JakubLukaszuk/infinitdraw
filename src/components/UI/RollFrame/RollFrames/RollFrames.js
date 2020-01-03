@@ -2,6 +2,7 @@ import React from 'react'
 import style from './RollFrames.module.sass';
 import RollFrame from '../RollFrame';
 import {connect} from 'react-redux';
+import * as actions from '../../../../store/actions';
 
 
 const rollFrames = props => {
@@ -28,8 +29,14 @@ const mapStateToProps = state => {
     return {
       rollsAmout: state.gameReducer.rollsAmout,
       money: state.gameReducer.money,
-      aveilableBids: state.gameReducer.aveilableBids
+      rdToRoll: state.gameReducer.rollMove
     }
 }
 
-export default(connect(mapStateToProps, null)(rollFrames));
+const mapDispatchToProps = dispatch => {
+  return {
+    stopRoll: () => dispatch(actions.stopRoll())
+  };
+}
+
+export default(connect(mapStateToProps, mapDispatchToProps)(rollFrames));
