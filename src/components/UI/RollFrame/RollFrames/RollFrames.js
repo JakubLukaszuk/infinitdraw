@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 const rollFrames = props => {
 
   const createRolls = () => {
+    console.log(props.rollsAmout);
+    console.log(props.money)
     let rolls = []
     // Outer loop to create parent
     for (let i = 0; i < props.rollsAmout; i++) {
@@ -24,7 +26,9 @@ const rollFrames = props => {
 
 const mapStateToProps = state => {
     return {
-      rollsAmout: state.gameReducer.rollsAmout
+      rollsAmout: state.gameReducer.rollsAmout,
+      money: state.gameReducer.money,
+      aveilableBids: state.gameReducer.aveilableBids
     }
 }
 

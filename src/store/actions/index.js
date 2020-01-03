@@ -1,9 +1,7 @@
 export {
-  setAmoutOfRolls,
-  decreaseAmoutOfRolls,
-  increaseAmoutOfRolls,
   setMoney,
   decraseMoney,
-  increaseMoney
+  increaseMoney,
+  setBid
 }
 from './game';

@@ -22,7 +22,7 @@ const NavigationAuth = () => (
   <NavItem link = {ROUTES.HOME}>Home</NavItem>
   <NavItem link = {ROUTES.ACCOUNT}>Account</NavItem>
   <NavItem link = {ROUTES.GAME}>Game</NavItem>
-    <li>
+    <li className = {style.signOut}>
       <SignOutButton/>
     </li>
   </ul>
