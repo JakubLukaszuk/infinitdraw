@@ -9,4 +9,5 @@ export const SET_BID = 'SET_BID';
 export const START_ROLL = 'START_ROLL';
 export const STOP_ROLL = 'STOP_ROLL';
 
-
+export const SET_DRAW_RESULT = 'GET_DRAW_RESULT';
+export const SET_DRAW_ARRAY = 'GET_DRAW_ARRAY';

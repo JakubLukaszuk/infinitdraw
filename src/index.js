@@ -9,13 +9,14 @@ import * as serviceWorker from './serviceWorker';
 import thunk from 'redux-thunk';
 
 import gameReducer from './store/reducers/game';
+import drawReducer from './store/reducers/draw'
 import './global.sass';
 import App from './App';
 
 
 const rootReducer = combineReducers({
   gameReducer: gameReducer,
-  //other reducers
+  drawReducer: drawReducer
 })
 
 const store = createStore(rootReducer);
