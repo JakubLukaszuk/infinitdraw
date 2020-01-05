@@ -3,7 +3,12 @@ export {
   decraseMoney,
   increaseMoney,
   setBid,
+}
+from './game';
+
+export {
+  setDrawArray,
   startRoll,
   stopRoll
 }
-from './game';
+from './draw'

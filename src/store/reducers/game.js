@@ -5,7 +5,6 @@ const initialState = {
   money: 0,
   bid: 0,
   aveilableBids: [],
-  rollMove: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -91,16 +90,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         bid: action.bid
-      }
-    case actionTypes.START_ROLL:
-      return {
-        ...state,
-        rollMove: true
-      }
-    case actionTypes.STOP_ROLL:
-      return {
-        ...state,
-        rollMove: false
       }
 
     default:

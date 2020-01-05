@@ -1,7 +1,15 @@
 import * as actionTypes from './actionTypes';
 
-export const getDraw = (rollsAmout) => {
-        this.options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+export const startRoll = () => {
+    return {type: actionTypes.START_ROLL}
+}
+
+export const stopRoll = () => {
+    return {type: actionTypes.STOP_ROLL}
+}
+
+export const setDrawArray = (rollsAmout) => {
+        options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         let drawResult = [];
 
