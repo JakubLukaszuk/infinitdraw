@@ -5,6 +5,13 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions';
 
 const bidPanel = (props) => {
+
+  const start = () =>{
+    if (!props.rdToRoll) {
+      props.startRoll();
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.bidButtons}>
@@ -19,20 +26,22 @@ const bidPanel = (props) => {
             changed=
             {() => props.changed(bidOption)}/>))}
       </div>
-      <button className={styles.drawButton}>
+      <button className={styles.drawButton} onClick ={start}>
         DRAW
       </button>
     </div>
   );
 };
 
+
+
 const mapStateToProps = state => {
-  return {rdToRoll: state.gameReducer.rollMove}
+  return {rdToRoll: state.drawReducer.rollMove}
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    stopRoll: () => dispatch(actions.stopRoll())
+    startRoll: () => dispatch(actions.startRoll())
   }
 };
 

@@ -6,9 +6,9 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  let finalMoney = 0;
   switch (action.type) {
     case actionTypes.START_ROLL:
+        console.log("xD");
       return {
         ...state,
         rollMove: true

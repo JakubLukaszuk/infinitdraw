@@ -9,13 +9,13 @@ export const stopRoll = () => {
 }
 
 export const setDrawArray = (rollsAmout) => {
-        options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         let drawResult = [];
 
         for (let i = 0; i < rollsAmout; i++) {
-            const index = Math.floor(Math.random() * this.options.length)
-            const result = this.options[index]
+            const index = Math.floor(Math.random() * options.length)
+            const result = options[index]
             drawResult.push(result)
         }
         return {type: actionTypes.SET_DRAW_ARRAY, drawArray: drawResult};
