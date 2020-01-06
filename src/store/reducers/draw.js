@@ -8,7 +8,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.START_ROLL:
-        console.log("xD");
       return {
         ...state,
         rollMove: true
@@ -19,7 +18,7 @@ const reducer = (state = initialState, action) => {
         rollMove: false
       }
       //money rolls and avaliableBids
-    case actionTypes.SET_DRAW_ARRAY:
+    case actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT:
       return {
         ...state,
         drawArray: action.drawArray

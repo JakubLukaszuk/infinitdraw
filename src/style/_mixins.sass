@@ -1,3 +1,5 @@
+@import ./others
+
 
 =neonAnimation($lighterFirstColour, $darkerFirstColour, $lighterSecondColour, $darkerSecondColour, $darkestSecondColour, $name)
      @keyframes #{$name}
@@ -15,3 +17,11 @@
     border: 3px solid #{$neonColor}
 
 
+=drawGoToAnimation($name, $goalCardPosition)
+    @keyframes #{$name}
+        0%
+            transform: translateY($endOfRoll)
+        50%
+            transform: translateY(0)
+        100%
+            transform: translateY(#{$goalCardPosition})

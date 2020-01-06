@@ -9,6 +9,7 @@ const bidPanel = (props) => {
   const start = () =>{
     if (!props.rdToRoll) {
       props.startRoll();
+      props.setDrawArrayAndResults(props.rollsAmout);
     }
   }
 
@@ -36,12 +37,13 @@ const bidPanel = (props) => {
 
 
 const mapStateToProps = state => {
-  return {rdToRoll: state.drawReducer.rollMove}
+  return {rollsAmout: state.gameReducer.rollsAmout}
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    startRoll: () => dispatch(actions.startRoll())
+    startRoll: () => dispatch(actions.startRoll()),
+    setDrawArrayAndResults: (rollsAmout) => dispatch(actions.setDrawArrayAndResults(rollsAmout))
   }
 };
 

@@ -8,7 +8,7 @@ export const stopRoll = () => {
     return {type: actionTypes.STOP_ROLL}
 }
 
-export const setDrawArray = (rollsAmout) => {
+export const setDrawArrayAndResults = (rollsAmout) => {
         const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         let drawResult = [];
@@ -18,12 +18,9 @@ export const setDrawArray = (rollsAmout) => {
             const result = options[index]
             drawResult.push(result)
         }
-        return {type: actionTypes.SET_DRAW_ARRAY, drawArray: drawResult};
+        return {type: actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT, drawArray: drawResult};
     }
 
-export const getDrawResult = () => {
-
-}
 
 const simplifyResults = (draw) => {
     for (let index = 0; index < draw.length; index++) {

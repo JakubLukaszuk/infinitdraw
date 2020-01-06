@@ -7,7 +7,7 @@ export {
 from './game';
 
 export {
-  setDrawArray,
+  setDrawArrayAndResults,
   startRoll,
   stopRoll
 }

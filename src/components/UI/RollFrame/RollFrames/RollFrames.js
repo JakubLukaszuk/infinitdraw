@@ -9,16 +9,26 @@ const rollFrames = props => {
 
   const data = {...props};
 
-  useEffect(() => {
-    if (data.rdToRoll) {
-      data.setDrawArray(data.rollsAmout);
-      data.stopRoll();
-    }
-  }, [data.rdToRoll]);
+  const [isAnimation, setIsAnimation] = useState(false);
+
+  // useEffect(() => {
+  //   if (data.rdToRoll) {
+  //     data.setDrawArray(data.rollsAmout);
+     
+  //   }
+  // }, [data.rdToRoll]);
 
   useEffect(() =>{
+  if (data.rdToRoll) {
     console.log(data.drawArray);
+    toggleAnimation()
+    data.stopRoll();
+  }
   }, [data.drawArray])
+
+  const toggleAnimation = () =>{
+    setIsAnimation(!isAnimation);
+  }
   //
 
   // const classes = useState( {
@@ -34,12 +44,22 @@ const rollFrames = props => {
   // }
 
   const createRolls = () => {
-    console.log(props.rollsAmout);
-    console.log(props.money)
+    // console.log(props.rollsAmout);
+    // console.log(props.money)
     let rolls = []
+    // that.rollers[index].className = "roll";
+    // that.rollers[index].classList.add(`opening${index+1}`);
+
+    // that.startButton.setAttribute('disabled', true);
+
+    // setTimeout(function () {
+    //     that.rollers[index].classList.remove(`opening${index+1}`);
+    //     that.rollers[index].classList.add(`goTo${results[index]}`);
+    // }, (index + 1) * 1000);
 
     for (let i = 0; i < props.rollsAmout; i++) {
-      rolls.push(<RollFrame key={i}/>);
+        const index =  i;
+      rolls.push(<RollFrame key={i} isAnimationAllowed = {isAnimation} toggleAnimation = {toggleAnimation} index={index}/>);
       }
     return rolls
   }
@@ -63,7 +83,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     stopRoll: () => dispatch(actions.stopRoll()),
-    setDrawArray: (rollsAmout) => dispatch(actions.setDrawArray(rollsAmout))
   };
 }
 

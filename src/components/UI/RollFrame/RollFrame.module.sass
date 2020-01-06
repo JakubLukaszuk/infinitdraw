@@ -1,3 +1,6 @@
+@import ../../../style/_mixins
+@import ../../../style/others
+
 .standardBG
     content: url('/src/assets/images/rollMobileStandard.jpg')
 
@@ -19,3 +22,149 @@
     position: relative
     background-image: -webkit-linear-gradient(top, rgba(25, 25, 25, 0.8) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.05) 65%, rgba(25, 25, 25, 0.85) 100%);
     overflow: hidden
+
+.opening1
+    animation: drawAnimation1 1s linear forwards
+.opening2
+    animation: drawAnimation2 2s linear forwards
+.opening3
+    animation: drawAnimation3 3s linear forwards
+.opening4
+    animation: drawAnimation4 4s linear forwards
+
+.goTo1
+    animation: animationGoTo1 1s linear forwards
+.goTo2
+    animation: animationGoTo2 0.9s ease-out forwards
+.goTo3
+    animation: animationGoTo3 0.18s ease-out forwards
+.goTo4
+    animation: animationGoTo4 0.27s ease-out forwards
+.goTo5
+    animation: animationGoTo5 0.36s ease-out forwards
+.goTo6
+    animation: animationGoTo6 0.45s ease-out forwards
+.goTo7
+    animation: animationGoTo7 0.54s ease-out forwards
+.goTo8
+    animation: animationGoTo8 0.63s ease-out forwards
+.goTo9
+    animation: animationGoTo9 0.72s ease-out forwards
+.goTo10
+    animation: animationGoTo10 0.81s ease-out forwards
+.goTo11
+    animation: animationGoTo11 0.90s ease-out forwards
+.goTo12
+    animation: animationGoTo12 1s ease-out forwards
+
+@keyframes drawAnimation1
+    0%
+        transform: translateY(0)
+    100%
+        transform: translateY($endOfRoll)
+
+
+@keyframes drawAnimation2
+    0%
+        transform: translateY(0)
+    20%
+        transform: translateY($endOfRoll)
+    40%
+        transform: translateY(0)
+    60%
+        transform: translateY($endOfRoll)
+    80%
+        transform: translateY(0)
+    100%
+        transform: translateY($endOfRoll)
+
+@keyframes drawAnimation3
+    0%
+        transform: translateY(0)
+    14.3%
+        transform: translateY($endOfRoll)
+    28.6%
+        transform: translateY(0)
+    42.9%
+        transform: translateY($endOfRoll)
+    57.2%
+        transform: translateY(0)
+    71.5%
+        transform: translateY($endOfRoll)
+    85.3%
+        transform: translateY(0)
+    100%
+        transform: translateY($endOfRoll)
+
+
+@keyframes drawAnimation4
+    0%
+        transform: translateY(0)
+    11.11%
+        transform: translateY($endOfRoll)
+    22.22%
+        transform: translateY(0)
+    33.33%
+        transform: translateY($endOfRoll)
+    44.44%
+        transform: translateY(0)
+    55.55%
+        transform: translateY($endOfRoll)
+    66.66%
+        transform: translateY(0)
+    77.77%
+        transform: translateY($endOfRoll)
+    88.88%
+        transform: translateY(0)
+    100%
+        transform: translateY($endOfRoll)
+
+@keyframes drawAnimation5
+    0%
+        transform: translateY(0)
+    9.09%
+        transform: translateY($endOfRoll)
+    18.18%
+        transform: translateY(0)
+    27.27%
+        transform: translateY($endOfRoll)
+    36.36%
+        transform: translateY(0)
+    45.45%
+        transform: translateY($endOfRoll)
+    54.54%
+        transform: translateY(0)
+    63.63%
+        transform: translateY($endOfRoll)
+    72.72%
+        transform: translateY(0)
+    81.81%
+        transform: translateY($endOfRoll)
+    90.09%
+        transform: translateY(0)
+    100%
+        transform: translateY($endOfRoll)
+
+@keyframes animationGoTo1
+    0%
+        transform: translateY($endOfRoll)
+    8.3333%
+        transform: translateY(2.5%)
+    90%
+        transform: translateY($endOfRoll)
+    100%
+        transform: translateY(2.5%)
+
++drawGoToAnimation(animationGoTo2, -6%)
++drawGoToAnimation(animationGoTo3, -14%)
++drawGoToAnimation(animationGoTo4, -22%)
++drawGoToAnimation(animationGoTo5, -31%)
++drawGoToAnimation(animationGoTo6, -39%)
++drawGoToAnimation(animationGoTo7, -47%)
++drawGoToAnimation(animationGoTo8, -55%)
++drawGoToAnimation(animationGoTo9, -63.5%)
++drawGoToAnimation(animationGoTo10, -72%)
++drawGoToAnimation(animationGoTo11, -80%)
++drawGoToAnimation(animationGoTo12, -89%)
+
+
