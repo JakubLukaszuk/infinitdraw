@@ -21,8 +21,11 @@ const rollFrames = props => {
   useEffect(() =>{
   if (data.rdToRoll) {
     console.log(data.drawArray);
-    toggleAnimation()
-    data.stopRoll();
+    toggleAnimation();
+    setTimeout(() => {
+      data.stopRoll();
+
+    }, (props.rollsAmout) * 1200)
   }
   }, [data.drawArray])
 
@@ -59,7 +62,7 @@ const rollFrames = props => {
 
     for (let i = 0; i < props.rollsAmout; i++) {
         const index =  i;
-      rolls.push(<RollFrame key={i} isAnimationAllowed = {isAnimation} toggleAnimation = {toggleAnimation} index={index}/>);
+      rolls.push(<RollFrame key={i} isAnimationAllowed = {isAnimation} toggleAnimation = {toggleAnimation} index={index} rollPosition={data.drawArray[i]}/>);
       }
     return rolls
   }
@@ -76,7 +79,7 @@ const mapStateToProps = state => {
       rollsAmout: state.gameReducer.rollsAmout,
       money: state.gameReducer.money,
       rdToRoll: state.drawReducer.rollMove,
-      drawArray: state.drawReducer.drawArray
+      drawArray: state.drawReducer.drawArray,
     }
 }
 

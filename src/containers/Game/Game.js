@@ -22,6 +22,11 @@ const Game = () => {
 }
 
 const game = props => {
+
+  const data = {
+    ...props
+  };
+
   const [error,
     setError] = useState(ERROR_INIRIAL_STATE);
   const [loadnig,
@@ -32,13 +37,13 @@ const game = props => {
     setAvalialbeBids] = useState([])
 
   useEffect(() => {
-    props
+    data
       .firebase
-      .user(props.authUser.uid)
+      .user(data.authUser.uid)
       .on('value', snapshot => {
         const userData = snapshot.val();
         if (userData) {
-          props.onSetMoney(userData.money);
+          data.onSetMoney(userData.money);
         } else {
           console.log("error");
         }
@@ -46,14 +51,34 @@ const game = props => {
   }, []);
 
   useEffect(() => {
-    setMoney(props.money);
+    setMoney(data.money);
 
-  }, [props.money]);
+  }, [data.money]);
 
   useEffect(() => {
-    setAvalialbeBids(props.aveilableBids);
-    console.log(avalialbeBids);
-  }, [props.aveilableBids]);
+    // data.firebase.user(data.authUser.uid).set({   money: })
+    if (data.multipler > 0) {
+      setMoney(data.money + data.bid, data.multipler);
+    }
+  }, [data.multipler]);
+
+  useEffect(() => {
+    setAvalialbeBids(data.aveilableBids);
+  }, [data.aveilableBids]);
+
+  const draw = () => {
+    if (data.money > data.bid && data.bid !== 0 && !data.isRolling) {
+      data.startRoll();
+      data.setDrawArrayAndResults(data.amoutOfRolls);
+      data.onSetMoney(data.money - data.bid);
+    }
+  }
+
+  const setBidSecured = (bidValue) => {
+    if (!data.isRolling) {
+      data.setBid(bidValue);
+    }
+  }
 
   return (
     <div>
@@ -61,22 +86,31 @@ const game = props => {
       <section>
         <BidPanel
           avaliableBids={avalialbeBids}
-          changed={props.setBid}
-          setMoney={props.onSetMoney}
-          bid={props.bid}/> {money}
+          changed={setBidSecured}
+          start={draw}
+          bid={data.bid}/> {money}
       </section>
     </div>
   );
 }
 
 const mapStateToProps = state => {
-  return {money: state.gameReducer.money, aveilableBids: state.gameReducer.aveilableBids, amoutOfRolls: state.gameReducer.rollsAmout, bid: state.gameReducer.bid}
+  return {
+    money: state.gameReducer.money,
+    aveilableBids: state.gameReducer.aveilableBids,
+    amoutOfRolls: state.gameReducer.rollsAmout,
+    bid: state.gameReducer.bid,
+    multipler: state.drawReducer.multipler,
+    isRolling: state.drawReducer.rollMove
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onSetMoney: (money) => dispatch(actions.setMoney(money)),
-    setBid: (bid) => dispatch(actions.setBid(bid))
+    setBid: (bid) => dispatch(actions.setBid(bid)),
+    startRoll: () => dispatch(actions.startRoll()),
+    setDrawArrayAndResults: (rollsAmout) => dispatch(actions.setDrawArrayAndResults(rollsAmout))
   };
 }
 

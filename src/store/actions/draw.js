@@ -18,7 +18,32 @@ export const setDrawArrayAndResults = (rollsAmout) => {
             const result = options[index]
             drawResult.push(result)
         }
-        return {type: actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT, drawArray: drawResult};
+
+        const simplifedResults = simplifyResults(drawResult);
+        let multiplerResult=0;
+        if (simplifedResults.length === new Set(simplifedResults).size) {
+            multiplerResult = 1.2;
+        }
+        else{
+            const allEqual = arr => arr.every( e => e === arr[0] )
+            if (allEqual(simplifedResults)) {
+                const goal  = simplifyResults[0];
+                if (goal === 3) {
+                    multiplerResult = 2;
+                } else if (multiplerResult === 6) {
+                    multiplerResult = 3;
+                } else if (multiplerResult === 2) {
+                    multiplerResult = 5;
+                } else if (multiplerResult === 1) {
+                    multiplerResult = 7;
+                } else if (multiplerResult === 5) {
+                    multiplerResult = 1;
+                } else if (multiplerResult === 7) {
+                    multiplerResult = 10;
+                }
+            }
+        }
+        return {type: actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT, drawArray: drawResult, multipler: multiplerResult};
     }
 
 
