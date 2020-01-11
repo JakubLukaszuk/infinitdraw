@@ -126,13 +126,11 @@ const SignUpFormBase = props => {
               money
             });
           })
-          // .then(() => {
-          //   props.firebase.doSendEmailVerification();
-          // })
           .then(authUser => {
+            console.log(props.history);
             setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
             setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
-            error({error: null})
+            setError({error: null})
             props.history.push(ROUTES.GAME);
           })
           .catch(error => {

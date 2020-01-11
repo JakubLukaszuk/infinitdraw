@@ -58,7 +58,6 @@ class Firebase {
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
-              emailVerified: authUser.emailVerified,
               providerData: authUser.providerData,
               ...dbUser
             };
@@ -69,10 +68,6 @@ class Firebase {
       }
     });
 
-  doSendEmailVerification = () => this
-    .auth
-    .currentUser
-    .sendEmailVerification({url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT});
 
   user = uid => this
     .db

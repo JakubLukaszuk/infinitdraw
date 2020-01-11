@@ -63,9 +63,10 @@ const SignInFormBase = props => {
   const onSubmit = event => {
     if (isFormValid)
       props.firebase.doSignInWithEmailAndPassword(email.value, password.value).then(() => {
+        console.log(props.history);
         setPassword(INITAL_PASSWORD);
         setEmail(INITAL_EMAIL);
-        error({error: null});
+        setError({error: null});
         props.history.push(ROUTES.HOME);
       }).catch(error => {
         setError({error})

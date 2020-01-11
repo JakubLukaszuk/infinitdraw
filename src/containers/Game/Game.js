@@ -56,23 +56,34 @@ const game = props => {
   }, [data.money]);
 
   useEffect(() => {
-    // data.firebase.user(data.authUser.uid).set({   money: })
     if (data.multipler > 0) {
-      setMoney(data.money + data.bid, data.multipler);
+      console.log("multipler");
+      
+      setTimeout(() => {
+        data.onSetMoney(data.money + data.bid * data.multipler);
+      }, (data.amoutOfRolls) * 1250)
     }
-  }, [data.multipler]);
+  }, [data.drawArray]);
 
   useEffect(() => {
     setAvalialbeBids(data.aveilableBids);
   }, [data.aveilableBids]);
 
   const draw = () => {
-    if (data.money > data.bid && data.bid !== 0 && !data.isRolling) {
+    if (data.bid > 0 && data.money >= data.bid && !data.isRolling) {
       data.startRoll();
       data.setDrawArrayAndResults(data.amoutOfRolls);
       data.onSetMoney(data.money - data.bid);
-    }
-  }
+
+      data.firebase.user(data.authUser.uid).update({ money: data.money - data.bid})
+      .then(() => data.firebase.user(data.authUser.uid))
+      .then(snapshot => snapshot.val())
+      .catch(error => ( setError({
+        errorCode: error.code,
+        errorMessage: error.message
+    })));
+  }}
+
 
   const setBidSecured = (bidValue) => {
     if (!data.isRolling) {
@@ -101,7 +112,8 @@ const mapStateToProps = state => {
     amoutOfRolls: state.gameReducer.rollsAmout,
     bid: state.gameReducer.bid,
     multipler: state.drawReducer.multipler,
-    isRolling: state.drawReducer.rollMove
+    isRolling: state.drawReducer.rollMove,
+    drawArray: state.drawReducer.drawArray
   }
 }
 
