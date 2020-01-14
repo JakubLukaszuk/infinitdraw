@@ -4,6 +4,7 @@ import {compose} from 'recompose';
 import {withAuthorization, withEmailVerification, AuthUserContext} from '../../components/Session';
 import {withFirebase} from '../../components/Firebase';
 import BidPanel from '../../components/BidPanel/BidPanel';
+import style from './Game.module.sass';
 
 import RollFrames from '../../components/UI/RollFrame/RollFrames/RollFrames';
 
@@ -57,8 +58,6 @@ const game = props => {
 
   useEffect(() => {
     if (data.multipler > 0) {
-      console.log("multipler");
-      
       setTimeout(() => {
         data.onSetMoney(data.money + data.bid * data.multipler);
       }, (data.amoutOfRolls) * 1250)
@@ -92,7 +91,7 @@ const game = props => {
   }
 
   return (
-    <div>
+    <div className = {style.game}>
       <RollFrames/>
       <section>
         <BidPanel

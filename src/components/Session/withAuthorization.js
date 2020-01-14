@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
@@ -9,18 +9,21 @@ import * as ROUTES from '../../constants/routes';
 const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
     componentDidMount() {
+      this.authorize();
+    }
+
+    componentWillUnmount() {
+      this.authorize();
+    }
+
+    authorize = () =>{
       this.listener = this.props.firebase.auth.onAuthStateChanged(
         authUser => {
           if (!condition(authUser)) {
-            console.log("landing");
             this.props.history.push(ROUTES.LANDING);
           }
         },
       );
-    }
-
-    componentWillUnmount() {
-      this.listener();
     }
 
     render() {

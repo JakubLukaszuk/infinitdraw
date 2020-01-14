@@ -1,0 +1,52 @@
+$input-background: rgb(57, 63, 84)
+$input-text-inactive: #7881A1
+$input-text-active: #BFD2FF
+
+// gradient animation
+@keyframes gradient
+  0%
+    background-position: 0 0
+  100%
+    background-position: 100% 0
+
+input
+    border-style: none
+    background: transparent
+    outline: none
+
+.webflowInputFrame
+  position: relative
+  display: flex
+  flex-direction: row
+  width: 100%
+  max-width: 400px
+  margin: 0 auto
+  border-radius: 2px
+  padding: 1rem 1.4rem 1.1rem
+  background: $input-background
+  margin: 5px
+  &:after
+    content: ""
+    position: absolute
+    left: 0px
+    right: 0px
+    bottom: 0px
+    z-index: 10
+    height: 4px
+    border-bottom-left-radius: 2px
+    border-bottom-right-radius: 2px
+    background-position: 0% 0%
+    background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6)
+    background-size: 500% auto
+    animation: gradient 3s linear infinite
+
+
+.webflowInput
+  background: $input-background
+  flex-grow: 1
+  color: $input-text-active
+  font-size: 1.6rem
+  line-height: 2rem
+  vertical-align: middle
+  &::-webkit-input-placeholder
+    color: $input-text-inactive

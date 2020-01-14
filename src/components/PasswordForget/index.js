@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {withFirebase} from '../Firebase';
 import {checkValidity} from '../../shared/validation';
+
 import Input from '../UI/Input/Input';
 import * as ROUTES from '../../constants/routes';
 
+import style from './passwordForget.module.sass';
+
 const PasswordForgetPage = () => (
-  <div>
-    <h1>PasswordForget</h1>
+  <div className = {style.passwordForget}>
+    <h2>Password Forget</h2>
     <PasswordForgetForm/>
   </div>
 );

@@ -7,10 +7,10 @@ import * as ROUTES from '../../constants/routes';
 import Input from '../UI/Input/Input';
 import {withFirebase} from '../Firebase';
 import {checkValidity, checkStringEquality} from '../../shared/validation';
+import style from './SignUpForm.module.sass';
 
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
+  <div className={style.page}>
     <SignUpForm/>
   </div>
 );
@@ -85,10 +85,10 @@ const SignUpFormBase = props => {
     setError] = useState({error: null})
 
   const isFormValid = () => {
-    if (!passwordCheck.valid)
+    if (!passwordCheck.valid) 
       return false;
     for (let key in registrationData) {
-      if (!registrationData[key].valid)
+      if (!registrationData[key].valid) 
         return false;
       }
     return true;
@@ -97,19 +97,20 @@ const SignUpFormBase = props => {
   const onSubmit = (event) => {
     if (isFormValid()) {
       console.log("valid");
-      let money = 0, rolls =0;
+      let money = 0,
+        rolls = 0;
       props
-      .firebase
-      .gameBaseValues()
-      .on('value', snapshot => {
-        const gameData = snapshot.val();
-        if (gameData) {
-          money = gameData.startMoney;
-          rolls = gameData.startRollsAmout;
-        }
-      });
+        .firebase
+        .gameBaseValues()
+        .on('value', snapshot => {
+          const gameData = snapshot.val();
+          if (gameData) {
+            money = gameData.startMoney;
+            rolls = gameData.startRollsAmout;
+          }
+        });
       console.log(money);
-      if(money && rolls){
+      if (money && rolls) {
         const roles = [];
         props
           .firebase
@@ -118,30 +119,27 @@ const SignUpFormBase = props => {
             const email = registrationData.emial.value;
             const username = registrationData.nickname.value;
             // Create a user in your Firebase realtime database
-            return props.firebase.user(authUser.user.uid).set({
-              username,
-              email,
-              roles,
-              rolls,
-              money
-            });
+            return props
+              .firebase
+              .user(authUser.user.uid)
+              .set({username, email, roles, rolls, money});
           })
           .then(authUser => {
             console.log(props.history);
             setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
             setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
             setError({error: null})
-            props.history.push(ROUTES.GAME);
+            props
+              .history
+              .push(ROUTES.GAME);
           })
           .catch(error => {
-            setError({error});
+            setError(error);
           });
       }
 
-    }
-    else
+    } else
       console.log("notValid");
-      
     event.preventDefault();
   }
 
@@ -193,6 +191,7 @@ const SignUpFormBase = props => {
 
   return (
     <form onSubmit={onSubmit}>
+      <h2>SignUp</h2>
       {inputs}
       {checkPasswordInput}
       <button type="submit">Sign Up</button>
@@ -201,7 +200,7 @@ const SignUpFormBase = props => {
   );
 }
 const SignUpLink = () => (
-  <p>
+  <p className = {style.link}>
     Don't have an account?
     <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
