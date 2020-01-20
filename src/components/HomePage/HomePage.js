@@ -75,32 +75,41 @@ const home = props => {
           console.log("error");
         }
       });
+      bestUsers.sort(compareMoney);
     return bestUsers
   }
 
-  const resetGame = () =>{
-        data.firebase.user(data.authUser.uid).update({ money: 500})
-        .then(() => data.firebase.user(data.authUser.uid))
-        .then(snapshot => snapshot.val())
-        .catch(error => ( setError({
-          errorCode: error.code,
-          errorMessage: error.message
-      })));
+  const compareMoney = (a, b) => {
+    if (a.money > b.money) return -1;
+    if (b.money > a.money) return 1;
+    return 0;
+  }
+
+  const resetGame = () => {
+    data
+      .firebase
+      .user(data.authUser.uid)
+      .update({money: 500})
+      .then(() => data.firebase.user(data.authUser.uid))
+      .then(snapshot => snapshot.val())
+      .catch(error => (setError({errorCode: error.code, errorMessage: error.message})));
   }
 
   return (
     <div className={style.home}>
       <div>
-        <h2>
-          {userName}
-        </h2>
-        <p>
-          Money {money}$
-        </p>
+        <div>
+          <h2>
+            {userName}
+          </h2>
+          <p>
+            Money {money}$
+          </p>
+        </div>
+        <button onClick = {resetGame()}>Restat Game</button>
       </div>
       <ul>{fetchBestPlayers().map((userData, i) => (
-          <li key={i}>{i}.{userData.nick}
-            money: {userData.money}$</li>
+          <li key={i}>{i+1}. {userData.nick} {userData.money}$</li>
         ))}</ul>
     </div>
   );
