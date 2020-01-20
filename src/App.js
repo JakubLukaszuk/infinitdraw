@@ -18,6 +18,7 @@ const App = () => (
       <AuthUserContext.Consumer>
         {authUser => authUser
           ? <Switch>
+              <Route exact path={ROUTES.LANDING} component={LandingPage}/>
               <Route path={ROUTES.HOME} component={HomePage}/>
               <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
               <Route path={ROUTES.GAME} component={Game}/>

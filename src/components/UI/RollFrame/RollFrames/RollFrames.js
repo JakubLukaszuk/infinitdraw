@@ -11,12 +11,7 @@ const rollFrames = props => {
 
   const [isAnimation, setIsAnimation] = useState(false);
 
-  // useEffect(() => {
-  //   if (data.rdToRoll) {
-  //     data.setDrawArray(data.rollsAmout);
-     
-  //   }
-  // }, [data.rdToRoll]);
+
 
   useEffect(() =>{
   if (data.rdToRoll) {
@@ -32,34 +27,10 @@ const rollFrames = props => {
   const toggleAnimation = () =>{
     setIsAnimation(!isAnimation);
   }
-  //
 
-  // const classes = useState( {
-  //   active: ''
-  // })
-  // addActiveClass = (e) => {
-  //     const clicked = e.target.id
-  //     if(this.state.active === clicked) {
-  //         this.setState({active: ''});
-  //     } else {
-  //         this.setState({active: clicked})
-  //    }
-  // }
 
   const createRolls = () => {
-    // console.log(props.rollsAmout);
-    // console.log(props.money)
     let rolls = []
-    // that.rollers[index].className = "roll";
-    // that.rollers[index].classList.add(`opening${index+1}`);
-
-    // that.startButton.setAttribute('disabled', true);
-
-    // setTimeout(function () {
-    //     that.rollers[index].classList.remove(`opening${index+1}`);
-    //     that.rollers[index].classList.add(`goTo${results[index]}`);
-    // }, (index + 1) * 1000);
-
     for (let i = 0; i < props.rollsAmout; i++) {
         const index =  i;
       rolls.push(<RollFrame key={i} isAnimationAllowed = {isAnimation} toggleAnimation = {toggleAnimation} index={index} rollPosition={data.drawArray[i]}/>);
