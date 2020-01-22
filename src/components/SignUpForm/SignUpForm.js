@@ -85,10 +85,10 @@ const SignUpFormBase = props => {
     setError] = useState({error: null})
 
   const isFormValid = () => {
-    if (!passwordCheck.valid) 
+    if (!passwordCheck.valid)
       return false;
     for (let key in registrationData) {
-      if (!registrationData[key].valid) 
+      if (!registrationData[key].valid)
         return false;
       }
     return true;

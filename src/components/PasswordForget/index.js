@@ -9,28 +9,27 @@ import * as ROUTES from '../../constants/routes';
 import style from './passwordForget.module.sass';
 
 const PasswordForgetPage = () => (
-  <div className = {style.passwordForget}>
+  <div className={style.passwordForget}>
     <h2>Password Forget</h2>
     <PasswordForgetForm/>
   </div>
 );
 
 const INITIAL_EMAIL = {
-    elementType: 'input',
-    elemetConfig: {
-      type: 'emial',
-      placeholder: 'Email Adress'
-    },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: true,
-      maxLength: 24
-    },
-    valid: false,
-    toutched: false
-  }
-
+  elementType: 'input',
+  elemetConfig: {
+    type: 'emial',
+    placeholder: 'Email Adress'
+  },
+  value: '',
+  validation: {
+    required: true,
+    isEmail: true,
+    maxLength: 24
+  },
+  valid: false,
+  toutched: false
+}
 
 const PasswordForgetFormBase = props => {
 
@@ -80,6 +79,10 @@ const PasswordForgetFormBase = props => {
   );
 }
 
+const SendResetPasswordButton = props => (
+  <button onClick={() =>props.firebase.doPasswordReset(props.email)}>Send Rest Password</button>
+)
+
 const PasswordForgetLink = () => (
   <p>
     <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
@@ -87,4 +90,5 @@ const PasswordForgetLink = () => (
 );
 export default PasswordForgetPage;
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
-export {PasswordForgetForm, PasswordForgetLink};
+const ResetPasswordButton = withFirebase(SendResetPasswordButton);
+export { PasswordForgetForm, PasswordForgetLink, ResetPasswordButton};

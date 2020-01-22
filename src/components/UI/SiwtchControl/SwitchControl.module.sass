@@ -1,3 +1,5 @@
+@import ../../../style/_colors
+@import ../../../style/_mixins
 
 .bidOption
   display: flex
@@ -14,7 +16,7 @@ input[type= "radio"]
   margin-right: 10px
   &:hover ~ .bidOptionInside
     background: #AAAA
-    border: 1px solid #db7290
+    border: 1px solid #eeeeee
     &::after
       content: ""
       display: block
@@ -26,7 +28,7 @@ input[type= "radio"]
 
   &:checked ~ .bidOptionInside
     background: green
-    border: 1px solid #db7290
+    border: 1px solid #eeeeee
     &::after
       content: ""
       display: block
@@ -34,7 +36,8 @@ input[type= "radio"]
       width: 12px
       height: 12px
       margin: 5px
-      background: white
+      background: #eeeeee
+      box-shadow: 0 0 3px 2px #fff, 0 0 5px 3px #f0f, 0 0 6px 4px #0ff
 
 .bidOptionInside
   position: absolute
@@ -45,6 +48,8 @@ input[type= "radio"]
   border-radius: 50%
   background: black
   border: 2px solid #AAAAAA
+  +simpleNeonBorder($neonBorder, $neonBorderShadow)
+
 
 
 

@@ -4,6 +4,7 @@ import {compose} from 'recompose';
 import {withAuthorization, withEmailVerification, AuthUserContext} from '../../components/Session';
 import {withFirebase} from '../../components/Firebase';
 import BidPanel from '../../components/BidPanel/BidPanel';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import style from './Game.module.sass';
 
 import RollFrames from '../../components/UI/RollFrame/RollFrames/RollFrames';
@@ -38,6 +39,7 @@ const game = props => {
     setAvalialbeBids] = useState([])
 
   useEffect(() => {
+    setLoading(true);
     data
       .firebase
       .user(data.authUser.uid)
@@ -45,10 +47,11 @@ const game = props => {
         const userData = snapshot.val();
         if (userData) {
           data.onSetMoney(userData.money);
+          setLoading(false)
         } else {
           console.log("error");
         }
-      });
+      })
   }, []);
 
   useEffect(() => {
@@ -92,14 +95,14 @@ const game = props => {
 
   return (
     <div className = {style.game}>
-      <RollFrames/>
+    {loadnig ? <Spinner/> : [    <RollFrames/>,
       <section>
         <BidPanel
           avaliableBids={avalialbeBids}
           changed={setBidSecured}
           start={draw}
           bid={data.bid}/> {money}
-      </section>
+      </section>]}
     </div>
   );
 }
