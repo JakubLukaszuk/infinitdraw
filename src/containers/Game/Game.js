@@ -95,8 +95,8 @@ const game = props => {
 
   return (
     <div className = {style.game}>
-    {loadnig ? <Spinner/> : [    <RollFrames/>,
-      <section>
+    {loadnig ? <Spinner/> : [    <RollFrames key='0'/>,
+      <section key='1'>
         <BidPanel
           avaliableBids={avalialbeBids}
           changed={setBidSecured}

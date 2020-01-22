@@ -51,12 +51,20 @@ const home = props => {
               bestUsers.push({nick: userData[key].username, money: userData[key].money})
             }
           }
+          bestUsers.sort((a, b) => {
+            if (a.money > b.money)
+              return -1;
+            if (b.money > a.money)
+              return 1;
+            return 0;
+          });      
         } else {
           console.log("error");
         }
       });
-    bestUsers.sort(compareMoney);
-    setBestPlayers(bestUsers)
+
+
+    setBestPlayers(bestUsers);
     data
       .firebase
       .user(data.authUser.uid)
@@ -75,14 +83,6 @@ const home = props => {
   }, []);
 
 
-  const compareMoney = (a, b) => {
-    if (a.money > b.money)
-      return -1;
-    if (b.money > a.money)
-      return 1;
-    return 0;
-  }
-
   const resetGame = () => {
     data
       .firebase
@@ -96,7 +96,6 @@ const home = props => {
   return (
     <div className={style.home}>
     {loadnig ? <Spinner/> : [<div key = '0' className={[style.userData, style.topSpace].join(' ')}>
-    <div>
       <h2>
         {userName}
       </h2>
@@ -106,15 +105,13 @@ const home = props => {
       <p>
         Money: {money}$
       </p>
-      <button onClick={resetGame()}>Restat Game</button>
+      <button onClick={resetGame}>Restat Game</button>
       <ResetPasswordButton email = {props.authUser.email}/>
-    </div>
   </div>,
-  <div key='1' className={style.topSpace}>
+  <div key='1' className={[style.topSpace, style.table].join(' ')}>
     <h3>Top 10 players:</h3>
     <ul>{bestPlayers.map((userData, i) => (
-        <li key= {i}>{i + 1}. {userData.nick}
-          {userData.money}$</li>
+        <li key= {i}>{i + 1}. {userData.nick} {userData.money}$</li>
       ))}</ul>
   </div>]}
     </div>
