@@ -3,6 +3,7 @@ import {withAuthorization, AuthUserContext} from '../../components/Session';
 import {withFirebase} from '../../components/Firebase';
 import Spinner from '../UI/Spinner/Spinner';
 import style from './HomePage.module.sass';
+import RollFrame from '../UI/RollFrame/RollFrame';
 import {ResetPasswordButton} from '../PasswordForget'
 
 const ERROR_INIRIAL_STATE = null;
@@ -57,7 +58,7 @@ const home = props => {
             if (b.money > a.money)
               return 1;
             return 0;
-          });      
+          });
         } else {
           console.log("error");
         }
@@ -95,6 +96,8 @@ const home = props => {
 
   return (
     <div className={style.home}>
+    <div className = {[style.wave, style.left].join(' ')}/>
+    <div className = {[style.wave, style.right].join(' ')}/>
     {loadnig ? <Spinner/> : [<div key = '0' className={[style.userData, style.topSpace].join(' ')}>
       <h2>
         {userName}
@@ -105,7 +108,7 @@ const home = props => {
       <p>
         Money: {money}$
       </p>
-      <button onClick={resetGame}>Restat Game</button>
+      <button onClick={resetGame} className = {style.restart}>Restat Game</button>
       <ResetPasswordButton email = {props.authUser.email}/>
   </div>,
   <div key='1' className={[style.topSpace, style.table].join(' ')}>
