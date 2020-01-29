@@ -80,7 +80,7 @@ const PasswordForgetFormBase = props => {
 }
 
 const SendResetPasswordButton = props => (
-  <button onClick={() =>props.firebase.doPasswordReset(props.email)}>Send Rest Password</button>
+  <button onClick={() =>props.firebase.doPasswordReset(props.email)}>Reset Password</button>
 )
 
 const PasswordForgetLink = () => (

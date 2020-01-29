@@ -13,6 +13,7 @@ import * as actions from '../../store/actions/index';
 
 const ERROR_INIRIAL_STATE = null;
 const LOADING_INITIAL_STATE = false;
+const BID_PANEL_INITIAL_STATE = 'Select your bid';
 
 const Game = () => {
   return (
@@ -36,7 +37,8 @@ const game = props => {
   const [money,
     setMoney] = useState(0);
   const [avalialbeBids,
-    setAvalialbeBids] = useState([])
+    setAvalialbeBids] = useState([]);
+  const [bidPanelTxt, setBidPanelTxt] = useState(BID_PANEL_INITIAL_STATE);
 
   useEffect(() => {
     setLoading(true);
@@ -62,8 +64,10 @@ const game = props => {
   useEffect(() => {
     if (data.multipler > 0) {
       setTimeout(() => {
-        data.onSetMoney(data.money + data.bid * data.multipler);
-      }, (data.amoutOfRolls) * 1250)
+        const prize = data.bid * data.multipler;
+        data.onSetMoney(data.money + prize);
+        setBidPanelTxt("You Win: $"+prize);
+      }, (data.amoutOfRolls) * 1250);
     }
   }, [data.drawArray]);
 
@@ -71,20 +75,35 @@ const game = props => {
     setAvalialbeBids(data.aveilableBids);
   }, [data.aveilableBids]);
 
+
   const draw = () => {
-    if (data.bid > 0 && data.money >= data.bid && !data.isRolling) {
+    if (data.bid <= 0) {
+      setBidPanelTxt('Set bid first');
+    }
+    else if (data.money <= data.bid) {
+      setBidPanelTxt("You don't have enought money!");
+    }
+    else if (data.isRolling) {
+      setBidPanelTxt('Machine is working!');
+    }
+    else
+    {
       data.startRoll();
       data.setDrawArrayAndResults(data.amoutOfRolls);
       data.onSetMoney(data.money - data.bid);
 
       data.firebase.user(data.authUser.uid).update({ money: data.money - data.bid})
-      .then(() => data.firebase.user(data.authUser.uid))
-      .then(snapshot => snapshot.val())
       .catch(error => ( setError({
         errorCode: error.code,
         errorMessage: error.message
     })));
-  }}
+    setTimeout(() => {
+      if (!data.isRolling) {
+        setBidPanelTxt('Game Ready');
+      }
+    }, (data.amoutOfRolls) * 2000);
+    }
+}
 
 
   const setBidSecured = (bidValue) => {
@@ -93,17 +112,27 @@ const game = props => {
     }
   }
 
+  const setTxtInBidPanel = (txt) => {
+    setBidPanelTxt(txt);
+  }
+
   return (
-    <div className = {style.game}>
-    {loadnig ? <Spinner/> : [    <RollFrames key='0'/>,
-      <section key='1'>
-        <BidPanel
-          avaliableBids={avalialbeBids}
-          changed={setBidSecured}
-          start={draw}
-          bid={data.bid}/> {money}
-      </section>]}
-    </div>
+  <div className = {style.wrapper}>
+  <div className = {style.game}>
+  {loadnig ? <Spinner/> : [    <RollFrames key='0'/>,
+    <section key='1'>
+      <BidPanel
+        avaliableBids={avalialbeBids}
+        changed={setBidSecured}
+        start={draw}
+        panelTxt = {bidPanelTxt}
+        setPanelText = {setTxtInBidPanel}
+        isRolling = {data.isRolling}
+        bid={data.bid}/>
+        <p className = {style.money}>Your money: ${money}</p>
+    </section>]}
+  </div>
+  </div>
   );
 }
 

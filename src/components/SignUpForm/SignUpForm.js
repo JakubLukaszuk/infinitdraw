@@ -97,8 +97,7 @@ const SignUpFormBase = props => {
   const onSubmit = (event) => {
     if (isFormValid()) {
       console.log("valid");
-      let money = 0,
-        rolls = 0;
+      let money = 0;
       props
         .firebase
         .gameBaseValues()
@@ -106,10 +105,8 @@ const SignUpFormBase = props => {
           const gameData = snapshot.val();
           if (gameData) {
             money = gameData.startMoney;
-            rolls = gameData.startRollsAmout;
           }
         });
-      console.log(money);
       if (money && rolls) {
         const roles = [];
         props
@@ -122,7 +119,7 @@ const SignUpFormBase = props => {
             return props
               .firebase
               .user(authUser.user.uid)
-              .set({username, email, roles, rolls, money});
+              .set({username, email, roles, money});
           })
           .then(authUser => {
             console.log(props.history);

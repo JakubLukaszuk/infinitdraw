@@ -106,15 +106,15 @@ const home = props => {
         email: {userEmail}
       </p>
       <p>
-        Money: {money}$
+        Money: ${money}
       </p>
-      <button onClick={resetGame} className = {style.restart}>Restat Game</button>
+      <button onClick={resetGame} className = {style.restart}>Restart Game</button>
       <ResetPasswordButton email = {props.authUser.email}/>
   </div>,
   <div key='1' className={[style.topSpace, style.table].join(' ')}>
     <h3>Top 10 players:</h3>
     <ul>{bestPlayers.map((userData, i) => (
-        <li key= {i}>{i + 1}. {userData.nick} {userData.money}$</li>
+        <li key= {i}>{i + 1}. {userData.nick} ${userData.money}</li>
       ))}</ul>
   </div>]}
     </div>

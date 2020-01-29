@@ -1,0 +1,32 @@
+.displayPanel
+    width: 80%
+    height: 50px
+    padding: 10px 20px
+    background-color: #000000
+    color: #ffe817
+    margin: 10px 0 10px 0
+    border: 2px solid gray
+    box-shadow: 0px 1px 0px gray, 0px 2px 5px rgba(0, 0, 0, .5)
+    font-weight: bold
+
+
+.loading:after
+    content: ' .'
+    animation: dots 1s steps(5, end) infinite
+
+@keyframes dots
+  0%, 20%
+    color: rgba(0, 0, 0, 0)
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0)
+
+  40%
+    color: white
+    text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0)
+
+  60%
+    text-shadow: 0.25em 0 0 white, 0.5em 0 0 rgba(0, 0, 0, 0)
+
+  80%, 100%
+    text-shadow: .25em 0 0 white, .5em 0 0 white
+
+

@@ -22,7 +22,7 @@ export const setDrawArrayAndResults = (rollsAmout) => {
         const simplifedResults = simplifyResults(drawResult);
         let multiplerResult=0;
         if (simplifedResults.length === new Set(simplifedResults).size) {
-            multiplerResult = 1.2;
+            multiplerResult = 1.4;
         }
         else{
             const allEqual = arr => arr.every( e => e === arr[0] )

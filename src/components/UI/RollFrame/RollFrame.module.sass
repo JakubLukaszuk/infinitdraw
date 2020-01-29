@@ -22,6 +22,18 @@
     position: relative
     background-image: -webkit-linear-gradient(top, rgba(25, 25, 25, 0.8) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.05) 65%, rgba(25, 25, 25, 0.85) 100%);
     overflow: hidden
+    &:before
+        z-index: 1
+        content: ''
+        position: absolute
+        width: 50%
+        height: 150%
+        top: -30%
+        right: -5%
+        background: rgba(255, 255, 255, 0.3)
+        background: linear-gradient(top, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05))
+        transform: rotate(40deg)
+
 
 .opening1
     animation: drawAnimation1 1s linear forwards

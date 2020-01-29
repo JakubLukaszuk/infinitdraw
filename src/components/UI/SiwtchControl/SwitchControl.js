@@ -14,6 +14,7 @@ class SwitchControl extends Component {
             onChange={this.props.changed}
             type="radio"/>
                     <label>
+        {this.props.anotiation}
         {this.props.label}
         </label>
         <div className = {style.bidOptionInside}/>
