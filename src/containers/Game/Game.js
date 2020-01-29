@@ -21,7 +21,6 @@ const Game = () => {
       {authUser => (<BaseGame authUser={authUser}/>)}
     </AuthUserContext.Consumer>
   )
-
 }
 
 const game = props => {
@@ -66,8 +65,11 @@ const game = props => {
       setTimeout(() => {
         const prize = data.bid * data.multipler;
         data.onSetMoney(data.money + prize);
-        setBidPanelTxt("You Win: $"+prize);
+        setBidPanelTxt("You Win: $" + prize);
       }, (data.amoutOfRolls) * 1250);
+    }
+    if (data.multipler === 0) {
+      setBidPanelTxt("You lose: $" + data.bid);
     }
   }, [data.drawArray]);
 

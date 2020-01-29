@@ -3,7 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   rollMove: false,
   drawArray: [],
-  multipler: 0
+  multipler: null
 }
 
 const reducer = (state = initialState, action) => {
