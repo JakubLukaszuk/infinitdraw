@@ -38,6 +38,11 @@ const game = props => {
   const [avalialbeBids,
     setAvalialbeBids] = useState([]);
   const [bidPanelTxt, setBidPanelTxt] = useState(BID_PANEL_INITIAL_STATE);
+  const [loseStrike,
+    setLoseStrike] = useState(0);
+  const [winStrike,
+    setWinStrike] = useState(0);
+  const [prizeStack, setPrizeStack] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -63,13 +68,20 @@ const game = props => {
   useEffect(() => {
     if (data.multipler > 0) {
       setTimeout(() => {
+        setLoseStrike(0);
+        setWinStrike(winStrike+1);
         const prize = data.bid * data.multipler;
+        setPrizeStack(prizeStack + prize);
         data.onSetMoney(data.money + prize);
-        setBidPanelTxt("You Win: $" + prize);
+        setBidPanelTxt("You win: $" + prize);
       }, (data.amoutOfRolls) * 1250);
     }
     if (data.multipler === 0) {
-      setBidPanelTxt("You lose: $" + data.bid);
+      setTimeout(() => {
+        setWinStrike(0);
+        setLoseStrike(loseStrike+1);
+        setBidPanelTxt("You lose: $" + data.bid);
+      }, (data.amoutOfRolls) * 1250);
     }
   }, [data.drawArray]);
 
@@ -130,7 +142,9 @@ const game = props => {
         panelTxt = {bidPanelTxt}
         setPanelText = {setTxtInBidPanel}
         isRolling = {data.isRolling}
-        bid={data.bid}/>
+        bid = {data.bid}
+        loseStrike = {loseStrike}
+        winStrike = {winStrike}/>
         <p className = {style.money}>Your money: ${money}</p>
     </section>]}
   </div>
