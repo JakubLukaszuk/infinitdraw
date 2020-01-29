@@ -19,30 +19,33 @@ export const setDrawArrayAndResults = (rollsAmout) => {
             drawResult.push(result)
         }
 
-        const simplifedResults = simplifyResults(drawResult);
-        let multiplerResult=0;
-        if (simplifedResults.length === new Set(simplifedResults).size) {
+        simplifyResults(drawResult);
+        let uniqueResultsSize = new Set(drawResult).size;
+        let multiplerResult = 0;
+        console.log(uniqueResultsSize);
+        if (drawResult.length === uniqueResultsSize) {
             multiplerResult = 1.4;
         }
-        else{
-            const allEqual = arr => arr.every( e => e === arr[0] )
-            if (allEqual(simplifedResults)) {
-                const goal  = simplifyResults[0];
+        console.log(uniqueResultsSize === 1);
+        if (uniqueResultsSize === 1) {
+            console.log('aa '+uniqueResultsSize);
+                const goal = drawResult[0];
+
                 if (goal === 3) {
                     multiplerResult = 2;
-                } else if (multiplerResult === 6) {
+                } else if (goal === 6) {
                     multiplerResult = 3;
-                } else if (multiplerResult === 2) {
+                } else if (goal === 2) {
                     multiplerResult = 5;
-                } else if (multiplerResult === 1) {
+                } else if (goal === 1) {
                     multiplerResult = 7;
-                } else if (multiplerResult === 5) {
+                } else if (goal === 5) {
                     multiplerResult = 1;
-                } else if (multiplerResult === 7) {
+                } else if (goal === 7) {
                     multiplerResult = 10;
                 }
             }
-        }
+            console.log(multiplerResult);
         return {type: actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT, drawArray: drawResult, multipler: multiplerResult};
     }
 
@@ -53,5 +56,6 @@ const simplifyResults = (draw) => {
         else if (draw[index] === 10 || draw[index] === 12) draw[index] = 6;
         else if (draw[index] === 9) draw[index] = 2;
     }
+    console.log("Simple: "+draw);
     return draw;
 }

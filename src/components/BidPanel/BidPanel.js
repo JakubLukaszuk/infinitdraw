@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions';
 import {Line} from 'rc-progress';
 import DispalyPanel from '../../components/UI/DisplayPanel/DisplayPanel';
-import {useState, useEffect} from 'react'
+import { useEffect} from 'react'
 
 const bidPanel = (props) => {
 

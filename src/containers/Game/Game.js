@@ -13,7 +13,7 @@ import * as actions from '../../store/actions/index';
 
 const ERROR_INIRIAL_STATE = null;
 const LOADING_INITIAL_STATE = false;
-const BID_PANEL_INITIAL_STATE = 'Select your bid';
+const BID_PANEL_INITIAL_STATE = 'Game Ready';
 
 const Game = () => {
   return (
@@ -42,7 +42,7 @@ const game = props => {
     setLoseStrike] = useState(0);
   const [winStrike,
     setWinStrike] = useState(0);
-  const [prizeStack, setPrizeStack] = useState(0);
+  const [isDrawAllowed, setIsDrawAllowed] = useState(true);
 
   useEffect(() => {
     setLoading(true);
@@ -61,9 +61,10 @@ const game = props => {
   }, []);
 
   useEffect(() => {
-    setMoney(data.money);
+  setMoney(data.money);
 
   }, [data.money]);
+
 
   useEffect(() => {
     if (data.multipler > 0) {
@@ -71,16 +72,34 @@ const game = props => {
         setLoseStrike(0);
         setWinStrike(winStrike+1);
         const prize = data.bid * data.multipler;
-        setPrizeStack(prizeStack + prize);
-        data.onSetMoney(data.money + prize);
-        setBidPanelTxt("You win: $" + prize);
+        let moneyToSave = 0;
+        if (winStrike == 5) {
+          moneyToSave = data.money + prize * 2;
+          setWinStrike(0);
+          setBidPanelTxt("You win: $" + prize * 2);
+        }
+        else {
+          moneyToSave = data.money + prize;
+          setBidPanelTxt("You win: $" + prize);
+        }
+        setMoneyInAppAndDB(moneyToSave);
       }, (data.amoutOfRolls) * 1250);
     }
     if (data.multipler === 0) {
+      setBidPanelTxt("You lose: $" + data.bid);
       setTimeout(() => {
         setWinStrike(0);
         setLoseStrike(loseStrike+1);
-        setBidPanelTxt("You lose: $" + data.bid);
+        let moneyToSave = 0;
+        if (loseStrike == 5) {
+          moneyToSave = data.money + data.bid * 2;
+          setLoseStrike(0);
+          setBidPanelTxt("You gain: $" + data.bid * 2);
+          setMoneyInAppAndDB(moneyToSave);
+        }
+        else {
+          setBidPanelTxt("You lose: $" + data.bid);
+        }
       }, (data.amoutOfRolls) * 1250);
     }
   }, [data.drawArray]);
@@ -91,6 +110,7 @@ const game = props => {
 
 
   const draw = () => {
+    console.log('IsAllowed: '+isDrawAllowed);
     if (data.bid <= 0) {
       setBidPanelTxt('Set bid first');
     }
@@ -100,25 +120,31 @@ const game = props => {
     else if (data.isRolling) {
       setBidPanelTxt('Machine is working!');
     }
-    else
+    else if(isDrawAllowed)
     {
+      setIsDrawAllowed(false);
       data.startRoll();
       data.setDrawArrayAndResults(data.amoutOfRolls);
-      data.onSetMoney(data.money - data.bid);
+      setMoneyInAppAndDB(data.money - data.bid)
 
-      data.firebase.user(data.authUser.uid).update({ money: data.money - data.bid})
-      .catch(error => ( setError({
-        errorCode: error.code,
-        errorMessage: error.message
-    })));
     setTimeout(() => {
       if (!data.isRolling) {
-        setBidPanelTxt('Game Ready');
+        setBidPanelTxt(BID_PANEL_INITIAL_STATE);
       }
-    }, (data.amoutOfRolls) * 2000);
+      setIsDrawAllowed(true)
+    }, (data.amoutOfRolls) * 1800);
     }
 }
 
+  const setMoneyInAppAndDB = (moneyInput) =>{
+    data.onSetMoney(moneyInput);
+
+    data.firebase.user(data.authUser.uid).update({ money: moneyInput})
+    .catch(error => ( setError({
+      errorCode: error.code,
+      errorMessage: error.message
+  })));
+  }
 
   const setBidSecured = (bidValue) => {
     if (!data.isRolling) {
@@ -142,7 +168,7 @@ const game = props => {
         panelTxt = {bidPanelTxt}
         setPanelText = {setTxtInBidPanel}
         isRolling = {data.isRolling}
-        bid = {data.bid}
+        bid={data.bid}
         loseStrike = {loseStrike}
         winStrike = {winStrike}/>
         <p className = {style.money}>Your money: ${money}</p>
