@@ -76,7 +76,7 @@ const game = props => {
         if (winStrike == 5) {
           moneyToSave = data.money + prize * 2;
           setWinStrike(0);
-          setBidPanelTxt("You win: $" + prize * 2);
+          setBidPanelTxt("You win x2: $" + prize * 2);
         }
         else {
           moneyToSave = data.money + prize;

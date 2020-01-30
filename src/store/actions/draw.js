@@ -24,28 +24,26 @@ export const setDrawArrayAndResults = (rollsAmout) => {
         let multiplerResult = 0;
         console.log(uniqueResultsSize);
         if (drawResult.length === uniqueResultsSize) {
-            multiplerResult = 1.4;
+            multiplerResult = 2;
         }
         console.log(uniqueResultsSize === 1);
         if (uniqueResultsSize === 1) {
-            console.log('aa '+uniqueResultsSize);
                 const goal = drawResult[0];
 
                 if (goal === 3) {
-                    multiplerResult = 2;
-                } else if (goal === 6) {
                     multiplerResult = 3;
+                } else if (goal === 6) {
+                    multiplerResult = 4;
                 } else if (goal === 2) {
-                    multiplerResult = 5;
+                    multiplerResult = 6;
                 } else if (goal === 1) {
-                    multiplerResult = 7;
+                    multiplerResult = 8;
                 } else if (goal === 5) {
                     multiplerResult = 1;
                 } else if (goal === 7) {
-                    multiplerResult = 10;
+                    multiplerResult = 12;
                 }
             }
-            console.log(multiplerResult);
         return {type: actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT, drawArray: drawResult, multipler: multiplerResult};
     }
 
