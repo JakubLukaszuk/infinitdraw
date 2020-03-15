@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
+
 import {withAuthorization, AuthUserContext} from '../../components/Session';
 import {withFirebase} from '../../components/Firebase';
 import Spinner from '../UI/Spinner/Spinner';
 import style from './HomePage.module.sass';
-import RollFrame from '../UI/RollFrame/RollFrame';
-import {ResetPasswordButton} from '../PasswordForget'
+import {ResetPasswordButton} from '../PasswordForget';
+import {getErrorMessageFromCode} from '../../shared/errorMessage';
+import MessageBox from '../UI/MessageBox/MessageBox';
 
 const ERROR_INIRIAL_STATE = null;
 const LOADING_INITIAL_STATE = false;
@@ -34,6 +36,13 @@ const home = props => {
     setUserName] = useState('');
   const [bestPlayers , setBestPlayers] = useState([]);
   const [userEmail , setUserEmail] = useState('');
+  const [showDialog, setShowDialog] = useState(false);
+
+  useEffect(() => {
+    return () => {
+     setBestPlayers([]);
+    }
+  }, []);
 
 
   useEffect(() => {
@@ -60,7 +69,7 @@ const home = props => {
             return 0;
           });
         } else {
-          console.log("error");
+          setError({message: "unknown Error"})
         }
       });
 
@@ -77,8 +86,7 @@ const home = props => {
           setUserEmail(data.authUser.email);
           setLoading(false)
         } else {
-          setLoading(false)
-          console.log("error");
+          setLoading(false);
         }
       });
   }, []);
@@ -91,11 +99,25 @@ const home = props => {
       .update({money: 500})
       .then(() => data.firebase.user(data.authUser.uid))
       .then(snapshot => snapshot.val())
-      .catch(error => (setError({errorCode: error.code, errorMessage: error.message})));
+      .catch(error => (getErrorMessageFromCode(error.code)));
+      refreshPage();
+  }
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  }
+
+  const toggleDialog = () =>
+  {
+    setShowDialog(!showDialog);
   }
 
   return (
     <div className={style.home}>
+      <MessageBox show={showDialog} onClose ={toggleDialog} title='Reset password'>
+        Restart form has been send to: {userEmail}
+      </MessageBox>
+
     <div className = {[style.wave, style.left].join(' ')}/>
     <div className = {[style.wave, style.right].join(' ')}/>
     {loadnig ? <Spinner/> : [<div key = '0' className={[style.userData, style.topSpace].join(' ')}>
@@ -108,8 +130,9 @@ const home = props => {
       <p>
         Money: ${money}
       </p>
+      {error && <p className = {style.error}>{error.message}</p>}
       <button onClick={resetGame} className = {style.restart}>Restart Game</button>
-      <ResetPasswordButton email = {props.authUser.email}/>
+      <ResetPasswordButton email = {props.authUser.email} additionaOnClick = {toggleDialog}/>
   </div>,
   <div key='1' className={[style.topSpace, style.table].join(' ')}>
     <h3>Top 10 players:</h3>

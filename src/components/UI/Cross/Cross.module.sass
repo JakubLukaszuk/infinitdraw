@@ -1,0 +1,26 @@
+.Cross
+  width: 20px
+  height: 20px
+  position: relative
+  transform: rotate(45deg)
+
+  &:before, &:after
+    content: ""
+    position: absolute
+    z-index: -1
+    background: black
+
+  &:before
+    left: 50%
+    width: 30%
+    margin-left: -15%
+    height: 100%
+
+  &:after
+    top: 50%
+    height: 30%
+    margin-top: -15%
+    width: 100%
+
+  &:hover
+    opacity: 1

@@ -22,11 +22,9 @@ export const setDrawArrayAndResults = (rollsAmout) => {
         simplifyResults(drawResult);
         let uniqueResultsSize = new Set(drawResult).size;
         let multiplerResult = 0;
-        console.log(uniqueResultsSize);
         if (drawResult.length === uniqueResultsSize) {
             multiplerResult = 2;
         }
-        console.log(uniqueResultsSize === 1);
         if (uniqueResultsSize === 1) {
                 const goal = drawResult[0];
 
@@ -54,6 +52,5 @@ const simplifyResults = (draw) => {
         else if (draw[index] === 10 || draw[index] === 12) draw[index] = 6;
         else if (draw[index] === 9) draw[index] = 2;
     }
-    console.log("Simple: "+draw);
     return draw;
 }

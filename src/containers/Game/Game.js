@@ -5,6 +5,7 @@ import {withAuthorization, withEmailVerification, AuthUserContext} from '../../c
 import {withFirebase} from '../../components/Firebase';
 import BidPanel from '../../components/BidPanel/BidPanel';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import {getErrorMessageFromCode} from '../../shared/errorMessage';
 import style from './Game.module.sass';
 
 import RollFrames from '../../components/UI/RollFrame/RollFrames/RollFrames';
@@ -55,7 +56,7 @@ const game = props => {
           data.onSetMoney(userData.money);
           setLoading(false)
         } else {
-          console.log("error");
+          setError({message:"unknown error"})
         }
       })
   }, []);
@@ -110,7 +111,6 @@ const game = props => {
 
 
   const draw = () => {
-    console.log('IsAllowed: '+isDrawAllowed);
     if (data.bid <= 0) {
       setBidPanelTxt('Set bid first');
     }
@@ -140,10 +140,8 @@ const game = props => {
     data.onSetMoney(moneyInput);
 
     data.firebase.user(data.authUser.uid).update({ money: moneyInput})
-    .catch(error => ( setError({
-      errorCode: error.code,
-      errorMessage: error.message
-  })));
+    .catch(error => ( setError(
+      getErrorMessageFromCode(error.code))));
   }
 
   const setBidSecured = (bidValue) => {
@@ -159,6 +157,7 @@ const game = props => {
   return (
   <div className = {style.wrapper}>
   <div className = {style.game}>
+  {error && <p className = {style.error}>{error.message}</p>}
   {loadnig ? <Spinner/> : [    <RollFrames key='0'/>,
     <section key='1'>
       <BidPanel

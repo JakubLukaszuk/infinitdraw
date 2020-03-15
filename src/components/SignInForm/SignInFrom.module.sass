@@ -14,12 +14,17 @@ $color-text-light: snow
     margin: auto
     background-image: $authBGImg
     h2
-        color: #ffffff
+        color: $standardTextColor
         margin-bottom: 10px
         font-size: 2rem
     form
         padding: 30px
         border: solid #ffffff9d 2px
+        .error
+            color: $errorColor
+            margin: auto
+            padding: .60em 1em
+            font-weight: bold
         .actionPanel
             display: flex
             justify-content: space-around
@@ -36,7 +41,7 @@ $color-text-light: snow
                 font-weight: bold
                 margin: 5px 10px 5px
             a
-                color: white
+                color: $standardTextColor
                 font-size: 1.2rem
 
 

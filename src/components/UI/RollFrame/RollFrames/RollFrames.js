@@ -11,18 +11,16 @@ const rollFrames = props => {
 
   const [isAnimation, setIsAnimation] = useState(false);
 
-
-
   useEffect(() =>{
   if (data.rdToRoll) {
-    console.log(data.drawArray);
     toggleAnimation();
     setTimeout(() => {
       data.stopRoll();
 
     }, (props.rollsAmout) * 1200)
   }
-  }, [data.drawArray])
+  }, [data.drawArray]);
+
 
   const toggleAnimation = () =>{
     setIsAnimation(!isAnimation);

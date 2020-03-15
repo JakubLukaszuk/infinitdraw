@@ -8,6 +8,7 @@ import Input from '../UI/Input/Input';
 import {withFirebase} from '../Firebase';
 import {checkValidity, checkStringEquality} from '../../shared/validation';
 import style from './SignUpForm.module.sass';
+import {getErrorMessageFromCode} from '../../shared/errorMessage';
 
 const SignUpPage = () => (
   <div className={style.page}>
@@ -96,7 +97,6 @@ const SignUpFormBase = props => {
 
   const onSubmit = (event) => {
     if (isFormValid()) {
-      console.log("valid");
       let money = 0;
       props
         .firebase
@@ -107,8 +107,8 @@ const SignUpFormBase = props => {
             money = gameData.startMoney;
           }
         });
-      if (money && rolls) {
-        const roles = [];
+      if (money) {
+        //const roles = [];
         props
           .firebase
           .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
@@ -116,27 +116,21 @@ const SignUpFormBase = props => {
             const email = registrationData.emial.value;
             const username = registrationData.nickname.value;
             // Create a user in your Firebase realtime database
-            return props
+            props
               .firebase
               .user(authUser.user.uid)
-              .set({username, email, roles, money});
-          })
-          .then(authUser => {
-            console.log(props.history);
-            setRegistrationData(...INITIAL_REGISTATION_DATA_STATE);
-            setPasswordCheck(...INITAL_CHECK_PASSWORD_STATE);
-            setError({error: null})
+              .set({username, email, money});
             props
               .history
               .push(ROUTES.GAME);
           })
           .catch(error => {
-            setError(error);
+            setError(getErrorMessageFromCode(error.code));
           });
       }
 
     } else
-      console.log("notValid");
+      setError({message: "Fill form correctly."})
     event.preventDefault();
   }
 
@@ -192,7 +186,7 @@ const SignUpFormBase = props => {
       {inputs}
       {checkPasswordInput}
       <button type="submit">Sign Up</button>
-      {error && <p>{error.message}</p>}
+      {error && <p className = {style.error}>{error.message}</p>}
     </form>
   );
 }

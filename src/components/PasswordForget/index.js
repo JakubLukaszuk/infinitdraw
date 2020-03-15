@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {withFirebase} from '../Firebase';
 import {checkValidity} from '../../shared/validation';
+import {getErrorMessageFromCode} from '../../shared/errorMessage';
 
 import Input from '../UI/Input/Input';
 import * as ROUTES from '../../constants/routes';
@@ -47,7 +48,7 @@ const PasswordForgetFormBase = props => {
         setError({error: null});
       })
       .catch(error => {
-        setError(error);
+        setError(getErrorMessageFromCode(error.code));
       });
     event.preventDefault();
   };
@@ -74,13 +75,13 @@ const PasswordForgetFormBase = props => {
       <button disabled={!email.valid} type="submit">
         Reset My Password
       </button>
-      {error && <p>{error.message}</p>}
+      {error && <p className = {style.error}>{error.message}</p>}
     </form>
   );
 }
 
 const SendResetPasswordButton = props => (
-  <button onClick={() =>props.firebase.doPasswordReset(props.email)}>Reset Password</button>
+  <button onClick={() =>props.firebase.doPasswordReset(props.email), ()=> props.additionaOnClick()}>Reset Password</button>
 )
 
 const PasswordForgetLink = () => (

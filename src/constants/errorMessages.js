@@ -1,0 +1,9 @@
+export const EMAIL_EXIST = 'Email is alerady registed.';
+export const INVALID_EMIAL = 'Wrong emial format';
+export const NOT_ALLOWED = 'Operation not allowed';
+export const TOO_WEEK_PASSWORD = 'Password is to week';
+export const NETWORK = 'Network connection error';
+export const TOO_MANY_REQUESTS = 'Too meny requests please try leater';
+export const USER_DISABLED = 'This user is disabled';
+export const USER_NOT_FOUND = 'Wrong email or password'
+export const UNKNOWN = 'Unknown error';

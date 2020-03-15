@@ -8,6 +8,7 @@ import {checkValidity} from '../../shared/validation';
 import {SignUpLink} from '../SignUpForm/SignUpForm';
 import {PasswordForgetLink} from '../PasswordForget';
 import * as ROUTES from '../../constants/routes';
+import {getErrorMessageFromCode} from '../../shared/errorMessage';
 
 import style from './SignInFrom.module.sass';
 
@@ -57,19 +58,18 @@ const SignInFormBase = props => {
     setError] = useState({error: null});
 
   const isFormValid = () => {
-    if (password.valid && email.valid) 
+    if (password.valid && email.valid)
       return true;
-    else 
+    else
       return false;
     }
-  
+
   const onSubmit = event => {
     if (isFormValid) {
       props
         .firebase
         .doSignInWithEmailAndPassword(email.value, password.value)
         .then(() => {
-          console.log(props.history);
           setPassword(INITAL_PASSWORD);
           setEmail(INITAL_EMAIL);
           setError({error: null});
@@ -78,7 +78,7 @@ const SignInFormBase = props => {
             .push(ROUTES.HOME);
         })
         .catch(error => {
-          setError(error)
+          setError(getErrorMessageFromCode(error.code));
         });
     } else {
       setError({message: "Form is not valid."})
@@ -130,7 +130,7 @@ const SignInFormBase = props => {
         </button>
         <PasswordForgetLink/>
       </div>
-      {error && <p>{error.message}</p>}
+      {error && <p className = {style.error}>{error.message}</p>}
     </form>
   );
 };

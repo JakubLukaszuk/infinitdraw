@@ -20,7 +20,6 @@ const reducer = (state = initialState, action) => {
       }
       //money rolls and avaliableBids
     case actionTypes.SET_DRAW_ARRAY_AND_DRAW_RESULT:
-      console.log(action.multipler);
       return {
         ...state,
         drawArray: action.drawArray,
