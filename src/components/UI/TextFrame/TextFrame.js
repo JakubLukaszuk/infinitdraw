@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './TextFrame.css';
+import classes from './TextFrame.module.sass';
 
 const textFrame = (props) =>{
     return(

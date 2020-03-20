@@ -3,7 +3,10 @@
 .wrapper
   padding: 10px 0 0 5px
   display: flex
+  flex-direction: row
   justify-content: space-between
+  @media (max-width: 499px)
+      flex-direction: column
   .bidButtons
     display: flex
     flex-direction: column
@@ -15,11 +18,14 @@
     margin-left: 10px
     padding-left: 5px
     @media (max-width: 499px)
-        flex-basis: 30%
+      flex-basis: 30%
+      margin-left: 5px
+      margin-right: 10px
+      padding-right: 5px
+
   .streak
     flex-basis: 10%
     margin: auto
-    position: relative
     .progresBar
       position: absolute
       top: 0
@@ -31,6 +37,11 @@
       margin: auto 0
       width: 150px
       border-radius: 10px
+      @media (max-width: 499px)
+        position: relative
+        transform: rotate(0)
+        left: 0
+        margin: 10px 0 0 0
 
   .drawButton
     height: 100%
