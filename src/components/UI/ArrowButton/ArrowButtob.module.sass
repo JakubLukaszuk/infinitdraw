@@ -1,0 +1,60 @@
+@import ../../../style/_mixins
+@import ../../../style/_colors
+
+.ArrowButton
+  position: absolute
+  cursor: pointer
+  left: 50%
+  top: 120%
+  transform: translate(-50%, -50%)
+  background-color: $neonLightYellow
+  border-radius: 50%
+  +simpleNeonBorder(none, $neonLightRed)
+  width: 60px
+  height: 60px
+  overflow: hidden
+  .Arrow
+    position: absolute
+    border: solid white
+    border-width: 0 7px 7px 0
+    display: inline-block
+    padding: 7px
+    border-radius: 3px
+    top: 0%
+    left: 0%
+
+    &::before
+        content: ''
+        position: absolute
+        border: solid white
+        border-width: 0 7px 7px 0
+        display: inline-block
+        padding: 7px
+        border-radius: 3px
+        top: 100%
+        left: 100%
+
+
+.down
+  transform: translate(-50%, -50%) rotate(45deg)
+  animation: arrow 2s linear infinite
+
+.up
+  transform: translate(-50%, -50%) rotate(-135deg)
+  animation: arrow 2s linear infinite reverse
+
+.ArrowButton:hover .Arrow
+  animation-duration: 1.3s
+
+@keyframes arrow
+  0%
+    top: -50%
+    left: 50%
+
+  50%
+    top: 50%
+    left: 50%
+
+  100%
+    top: 150%
+    left: 50%

@@ -19,25 +19,34 @@
         width: 100%
         display: flex
         flex-direction: column
+        position: relative
         .neon
             margin-top: 70px
             margin-bottom: 100px
+            @media (max-width: 499px)
+                margin-bottom: 60px
             display: flex
             justify-content: center
             h1
                 font-family: 'neon'
                 color: $neonRedFont
-                font-size: 9vw
+                padding: 20px 20px
+                font-size: 10vw
                 @media (max-width: 499px)
+                    font-size: 3.5em
+                    padding: 30px 20px
+                @media (max-width: 360px)
                     font-size: 3em
                 line-height: 9vw
                 text-shadow: 0 0 3vw $neonRedTextShadow
                 animation: neon 1s ease infinite
-                padding: 20px
                 +simpleNeonBorder($neonBorder, $neonBorderShadow)
                 border-radius: 10px
         h2
             font-size: 4vw
+            @media (max-width: 499px)
+                font-size: 2em
+                padding: 10px
             font-weight: bold
             text-transform: uppercase
             animation: neon 2s ease infinite
@@ -46,6 +55,9 @@
             margin-left: 20%
             margin-right: 20%
     .gameInfo
+        +simpleNeonBorder($neonBorder, $neonBorderShadow)
+        border-top: none
+        border-bottom: none
         margin-top: 50px
         width: 100%
         background-color: white
@@ -53,5 +65,10 @@
             padding: 25px 0
             margin: auto
             width: 40%
+            @media (max-width: 499px)
+                width: 90%
 
-
+.signUp
+    text-shadow: 0 0 3vw $neonRedTextShadow
+    animation: neon 1s ease infinite
+    cursor: pointer
