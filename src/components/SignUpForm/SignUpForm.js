@@ -108,14 +108,12 @@ const SignUpFormBase = props => {
           }
         });
       if (money) {
-        //const roles = [];
         props
           .firebase
           .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
           .then(authUser => {
             const email = registrationData.emial.value;
             const username = registrationData.nickname.value;
-            // Create a user in your Firebase realtime database
             props
               .firebase
               .user(authUser.user.uid)
@@ -129,8 +127,9 @@ const SignUpFormBase = props => {
           });
       }
 
-    } else
+    } else {
       setError({message: "Fill form correctly."})
+    }
     event.preventDefault();
   }
 
@@ -186,12 +185,12 @@ const SignUpFormBase = props => {
       {inputs}
       {checkPasswordInput}
       <button type="submit">Sign Up</button>
-      {error && <p className = {style.error}>{error.message}</p>}
+      {error && <p className={style.error}>{error.message}</p>}
     </form>
   );
 }
 const SignUpLink = () => (
-  <p className = {style.link}>
+  <p className={style.link}>
     Don't have an account?
     <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>

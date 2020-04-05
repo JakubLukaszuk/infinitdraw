@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import {compose} from 'recompose';
 import {withAuthorization, withEmailVerification, AuthUserContext} from '../../components/Session';
 import {withFirebase} from '../../components/Firebase';
 import BidPanel from '../../components/BidPanel/BidPanel';

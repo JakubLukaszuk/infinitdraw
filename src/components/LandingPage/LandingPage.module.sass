@@ -54,21 +54,32 @@
             border: none
             margin-left: 20%
             margin-right: 20%
-    .gameInfo
-        +simpleNeonBorder($neonBorder, $neonBorderShadow)
-        border-top: none
-        border-bottom: none
-        margin-top: 50px
-        width: 100%
-        background-color: white
-        .textContainer
-            padding: 25px 0
-            margin: auto
-            width: 40%
-            @media (max-width: 499px)
-                width: 90%
 
-.signUp
-    text-shadow: 0 0 3vw $neonRedTextShadow
-    animation: neon 1s ease infinite
-    cursor: pointer
+    .belowContainer
+        display: flex
+        flex-direction: column
+        .gameInfo
+            +simpleNeonBorder($neonBorder, $neonBorderShadow)
+            border-top: none
+            border-bottom: none
+            margin-top: 50px
+            width: 100%
+            background-color: white
+            .textContainer
+                padding: 25px 0
+                margin: auto
+                width: 40%
+                @media (max-width: 499px)
+                    width: 90%
+        .signUp
+            text-shadow: 0 0 3vw $neonRedTextShadow
+            animation: neon 1s ease infinite
+            cursor: pointer
+            font-size: 6vw
+            font-weight: bold
+            margin: auto
+            white-space: nowrap
+            @media (max-width: 499px)
+                font-size: 2.5em
+
+

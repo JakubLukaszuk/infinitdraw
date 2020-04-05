@@ -36,7 +36,9 @@ const home = props => {
     setUserName] = useState('');
   const [bestPlayers , setBestPlayers] = useState([]);
   const [userEmail , setUserEmail] = useState('');
-  const [showDialog, setShowDialog] = useState(false);
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
+  const [showBidValuesDialog, setShowBidValuesDialog] = useState(false);
+
 
   useEffect(() => {
     return () => {
@@ -107,15 +109,34 @@ const home = props => {
     window.location.reload(false);
   }
 
-  const toggleDialog = () =>
+  const toggleEmailDialog = () =>
   {
-    setShowDialog(!showDialog);
+    setShowEmailDialog(!showEmailDialog);
   }
+
+  const toggleBidValuesDialog = () =>
+  {
+    setShowBidValuesDialog(!showBidValuesDialog);
+  }
+
 
   return (
     <div className={style.home}>
-      <MessageBox show={showDialog} onClose ={toggleDialog} title='Reset password'>
+      <MessageBox show={showEmailDialog} onClose ={toggleEmailDialog} title='Reset password'>
         Restart form has been send to: {userEmail}
+      </MessageBox>
+      <MessageBox show={showBidValuesDialog} onClose = {toggleBidValuesDialog} title='Bid values'>
+        Three diferent cards: x1.5
+        {<br/>}
+        Cherries: x3
+        {<br/>}
+        Lemons: x4
+        {<br/>}
+        Arows: x1
+        {<br/>}
+        GoldBars: x8
+        {<br/>}
+        Dolar: x12
       </MessageBox>
 
     <div className = {[style.wave, style.left].join(' ')}/>
@@ -132,7 +153,8 @@ const home = props => {
       </p>
       {error && <p className = {style.error}>{error.message}</p>}
       <button onClick={resetGame} className = {style.restart}>Restart Game</button>
-      <ResetPasswordButton email = {props.authUser.email} additionaOnClick = {toggleDialog}/>
+      <button onClick={toggleBidValuesDialog} className={style.bidValue}>Show bid values</button>
+      <ResetPasswordButton email = {props.authUser.email} additionaOnClick = {toggleEmailDialog}/>
   </div>,
   <div key='1' className={[style.topSpace, style.table].join(' ')}>
     <h3>Top 10 players:</h3>
