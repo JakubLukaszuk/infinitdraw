@@ -3,6 +3,8 @@ import * as ERROR_MESSAGE from '../constants/errorMessages';
 export const getErrorMessageFromCode = (errCode) =>
 {
     switch (errCode) {
+        case "auth/wrong-password":
+            return {message: ERROR_MESSAGE.PASSSWORD_OR_EMIAL_IS_WRONG}
         case "auth/email-already-in-use":
             return {message: ERROR_MESSAGE.EMAIL_EXIST};
         case "auth/invalid-email":
@@ -18,7 +20,7 @@ export const getErrorMessageFromCode = (errCode) =>
         case "auth/user-disabled":
             return {message: ERROR_MESSAGE.USER_DISABLED};
         case "auth/user-not-found":
-            return {message: ERROR_MESSAGE.USER_NOT_FOUND};
+            return {message: ERROR_MESSAGE.PASSSWORD_OR_EMIAL_IS_WRONG};
         default:
             return {message: ERROR_MESSAGE.UNKNOWN};
     }

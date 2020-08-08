@@ -7,6 +7,7 @@ import style from './HomePage.module.sass';
 import {ResetPasswordButton} from '../PasswordForget';
 import {getErrorMessageFromCode} from '../../shared/errorMessage';
 import MessageBox from '../UI/MessageBox/MessageBox';
+import BackDrop from '../UI/BackDrop/BackDrop';
 
 const ERROR_INIRIAL_STATE = null;
 const LOADING_INITIAL_STATE = false;
@@ -38,17 +39,10 @@ const home = props => {
   const [userEmail , setUserEmail] = useState('');
   const [showEmailDialog, setShowEmailDialog] = useState(false);
   const [showBidValuesDialog, setShowBidValuesDialog] = useState(false);
-
-
-  useEffect(() => {
-    return () => {
-     setBestPlayers([]);
-    }
-  }, []);
-
+  const [showBackDrop, setShowBackDrop] = useState(false);
 
   useEffect(() => {
-    const bestUsers = [];
+    const newBestUsers = [];
     setLoading(true);
     data
       .firebase
@@ -60,10 +54,10 @@ const home = props => {
         if (userData) {
           for (const key in userData) {
             if (userData.hasOwnProperty(key)) {
-              bestUsers.push({nick: userData[key].username, money: userData[key].money})
+              newBestUsers.push({nick: userData[key].username, money: userData[key].money})
             }
           }
-          bestUsers.sort((a, b) => {
+          newBestUsers.sort((a, b) => {
             if (a.money > b.money)
               return -1;
             if (b.money > a.money)
@@ -74,9 +68,6 @@ const home = props => {
           setError({message: "unknown Error"})
         }
       });
-
-
-    setBestPlayers(bestUsers);
     data
       .firebase
       .user(data.authUser.uid)
@@ -91,6 +82,7 @@ const home = props => {
           setLoading(false);
         }
       });
+      setBestPlayers(newBestUsers);
   }, []);
 
 
@@ -109,23 +101,48 @@ const home = props => {
     window.location.reload(false);
   }
 
-  const toggleEmailDialog = () =>
+  const handleCloseEmialDialog = () =>
   {
-    setShowEmailDialog(!showEmailDialog);
+    setShowEmailDialog(false);
+    handleHideBackDrop();
   }
 
-  const toggleBidValuesDialog = () =>
+  const handleCloseBidValuesDialog = () =>
   {
-    setShowBidValuesDialog(!showBidValuesDialog);
+    setShowBidValuesDialog(false);
+    handleHideBackDrop();
+  }
+
+  const handleHideBackDrop = () =>{
+    setShowBackDrop(false);
+    setShowBidValuesDialog(false);
+    setShowEmailDialog(false);
+  }
+
+  const handleOpeneEmialDialog = () =>
+  {
+    setShowEmailDialog(true);
+    handleOpenBackDrop();
+  }
+
+  const handleOpenBidValuesDialog = () =>
+  {
+    setShowBidValuesDialog(true);
+    handleOpenBackDrop();
+  }
+
+  const handleOpenBackDrop = () =>{
+    setShowBackDrop(true);
   }
 
 
   return (
     <div className={style.home}>
-      <MessageBox show={showEmailDialog} onClose ={toggleEmailDialog} title='Reset password'>
+      <BackDrop show = {showBackDrop} clicked = {handleHideBackDrop} />
+      <MessageBox show={showEmailDialog} onClose ={handleCloseEmialDialog} title='Reset password'>
         Restart form has been send to: {userEmail}
       </MessageBox>
-      <MessageBox show={showBidValuesDialog} onClose = {toggleBidValuesDialog} title='Bid values'>
+      <MessageBox show={showBidValuesDialog} onClose = {handleCloseBidValuesDialog} title='Bid values'>
         Three diferent cards: x1.5
         {<br/>}
         Cherries: x3
@@ -153,8 +170,8 @@ const home = props => {
       </p>
       {error && <p className = {style.error}>{error.message}</p>}
       <button onClick={resetGame} className = {style.restart}>Restart Game</button>
-      <button onClick={toggleBidValuesDialog} className={style.bidValue}>Show bid values</button>
-      <ResetPasswordButton email = {props.authUser.email} additionaOnClick = {toggleEmailDialog}/>
+      <button onClick={handleOpenBidValuesDialog} className={style.bidValue}>Show bid values</button>
+      <ResetPasswordButton email = {props.authUser.email} additionaOnClick = {handleOpeneEmialDialog}/>
   </div>,
   <div key='1' className={[style.topSpace, style.table].join(' ')}>
     <h3>Top 10 players:</h3>

@@ -14,7 +14,8 @@ const input = (props) => {
     case('input'):
       inputElement = (
         <div className = {style.webflowInputFrame}>
-          <input {...props.elementConfig} value={props.value} onChange={props.changed} className = {style.webflowInput} /></div>
+          <input {...props.elementConfig} value={props.value} onChange={props.changed}
+          className = {props.invalid && props.toutched ? [style.webflowInput, style.Invalid].join(' ') : style.webflowInput} /></div>
       );
       break;
     case('textarea'):

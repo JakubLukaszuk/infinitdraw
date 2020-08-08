@@ -9,6 +9,7 @@ import {withFirebase} from '../Firebase';
 import {checkValidity, checkStringEquality} from '../../shared/validation';
 import style from './SignUpForm.module.sass';
 import {getErrorMessageFromCode} from '../../shared/errorMessage';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const SignUpPage = () => (
   <div className={style.page}>
@@ -26,6 +27,7 @@ const INITIAL_REGISTATION_DATA_STATE = {
     value: '',
     validation: {
       required: true,
+      minLength: 3,
       maxLength: 24
     },
     valid: false,
@@ -41,6 +43,7 @@ const INITIAL_REGISTATION_DATA_STATE = {
     validation: {
       required: true,
       isEmail: true,
+      minLength: 3,
       maxLength: 24
     },
     valid: false,
@@ -74,6 +77,12 @@ const INITAL_CHECK_PASSWORD_STATE = {
   toutched: false
 }
 
+const VALIDATION_MESSAGES ={
+  emptyFields: "All fileds must be filled",
+  passwordRules: "Passwords must be same and have 8 to 16 characters long",
+  otherRules: "Email and nick name must be 3 to 24 charactes long",
+}
+
 const SignUpFormBase = props => {
 
   const [registrationData,
@@ -85,29 +94,51 @@ const SignUpFormBase = props => {
   const [error,
     setError] = useState({error: null})
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const isFormValid = () => {
+    const validationState = {
+      isValid: false,
+      message: null
+    }
+    for (let key in registrationData) {
+      if (!registrationData[key].value)
+      {
+        validationState.message = VALIDATION_MESSAGES.emptyFields;
+        return validationState;
+      }
+    }
     if (!passwordCheck.valid)
-      return false;
+    {
+      validationState.message = VALIDATION_MESSAGES.passwordRules;
+      return validationState
+    }
     for (let key in registrationData) {
       if (!registrationData[key].valid)
-        return false;
+      {
+        validationState.message = VALIDATION_MESSAGES.otherRules;
+        return validationState;
       }
-    return true;
+      }
+    validationState.isValid = true;
+    return validationState;
   }
 
   const onSubmit = (event) => {
-    if (isFormValid()) {
-      let money = 0;
-      props
-        .firebase
-        .gameBaseValues()
-        .on('value', snapshot => {
-          const gameData = snapshot.val();
-          if (gameData) {
-            money = gameData.startMoney;
-          }
-        });
-      if (money) {
+    const validationValue = isFormValid();
+    if (validationValue.isValid) {
+      setIsLoading(true);
+      let money = 500;
+      // props
+      //   .firebase
+      //   .gameBaseValues()
+      //   .on('value', snapshot => {
+      //     const gameData = snapshot.val();
+      //     if (gameData) {
+      //       money = gameData.startMoney;
+      //     }
+      //   });
+      // if (money) {
         props
           .firebase
           .doCreateUserWithEmailAndPassword(registrationData.emial.value, registrationData.password.value)
@@ -124,11 +155,12 @@ const SignUpFormBase = props => {
           })
           .catch(error => {
             setError(getErrorMessageFromCode(error.code));
+            setIsLoading(false);
           });
-      }
-
+      // }
+        setIsLoading(false);
     } else {
-      setError({message: "Fill form correctly."})
+      setError({message: validationValue.message});
     }
     event.preventDefault();
   }
@@ -150,7 +182,7 @@ const SignUpFormBase = props => {
     const updatedControl = {
       ...passwordCheck,
       value: event.target.value,
-      valid: checkStringEquality(event.target.value, registrationData.password.value),
+      valid: checkStringEquality(event.target.value, registrationData.password.value) && checkValidity(event.target.value, registrationData.password.validation),
       toutched: true
     }
     setPasswordCheck(updatedControl)
@@ -180,13 +212,15 @@ const SignUpFormBase = props => {
     changed={(event) => passwordCheckHandler(event, passwordCheck)}/>
 
   return (
-    <form onSubmit={onSubmit}>
-      <h2>SignUp</h2>
-      {inputs}
-      {checkPasswordInput}
-      <button type="submit">Sign Up</button>
-      {error && <p className={style.error}>{error.message}</p>}
-    </form>
+    <React.Fragment>
+      {isLoading? <Spinner/> :  <form onSubmit={onSubmit}>
+        <h2>SignUp</h2>
+        {inputs}
+        {checkPasswordInput}
+        <button type="submit">Sign Up</button>
+        {error && <div className={style.errorContainer}> <p className={style.error}>{error.message}</p></div>}
+      </form>}
+    </React.Fragment>
   );
 }
 const SignUpLink = () => (

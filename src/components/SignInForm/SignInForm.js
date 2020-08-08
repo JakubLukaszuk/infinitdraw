@@ -65,7 +65,7 @@ const SignInFormBase = props => {
     }
 
   const onSubmit = event => {
-    if (isFormValid) {
+    if (isFormValid()) {
       props
         .firebase
         .doSignInWithEmailAndPassword(email.value, password.value)
@@ -81,7 +81,7 @@ const SignInFormBase = props => {
           setError(getErrorMessageFromCode(error.code));
         });
     } else {
-      setError({message: "Form is not valid."})
+      setError({message: "Bad login data."})
     }
 
     event.preventDefault();

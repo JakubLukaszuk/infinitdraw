@@ -17,13 +17,21 @@ $color-text-light: snow
         margin-bottom: 10px
         font-size: 2rem
     form
-        padding: 30px
+        padding: 30px 40px 30px 30px
         border: solid #ffffff 2px
-        .error
-            color: $errorColor
-            margin: auto
-            padding: .60em 1em
-            font-weight: bold
+        position: relative
+        .errorContainer
+            display: flex
+            flex-wrap: wrap
+            width: 100%
+            overflow: hidden
+            white-space: nowrap
+            text-overflow: ellipsis
+            .error
+                color: $errorColor
+                padding: .60em 1em
+                font-weight: bold
+                text-align: justify
 
     button
         background: $color-primary

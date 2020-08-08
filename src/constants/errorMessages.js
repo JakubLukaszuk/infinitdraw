@@ -5,5 +5,5 @@ export const TOO_WEEK_PASSWORD = 'Password is to week';
 export const NETWORK = 'Network connection error';
 export const TOO_MANY_REQUESTS = 'Too meny requests please try leater';
 export const USER_DISABLED = 'This user is disabled';
-export const USER_NOT_FOUND = 'Wrong email or password'
 export const UNKNOWN = 'Unknown error';
+export const PASSSWORD_OR_EMIAL_IS_WRONG = "Password or mail i s wrong";
